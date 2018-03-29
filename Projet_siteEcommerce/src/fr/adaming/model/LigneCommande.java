@@ -13,10 +13,14 @@ public class LigneCommande {
 	private int quantite;
 	private int prix;
 	
-	// association uml en java
+	// associations uml en java
 	@ManyToOne
-	@JoinColumn(name="panier_id", referencedColumnName="id_panier")
-	private Panier p;
+	@JoinColumn(name="produit_id", referencedColumnName="id_produit")
+	private Produit produit;
+	
+	@ManyToOne
+	@JoinColumn(name="commande_id", referencedColumnName="id_commande")
+	private Commande commande;
 	
 	// déclaration des constructeurs
 	public LigneCommande() {

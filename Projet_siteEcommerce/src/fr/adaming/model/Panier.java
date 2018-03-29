@@ -5,17 +5,23 @@ import javax.persistence.OneToMany;
 public class Panier {
 	
 	// association uml en java
-	@OneToMany(mappedBy="p")
-	private LigneCommande lc;
+	private LigneCommande ligneCommande;
+
+	// déclaration des constructeurs
+	public Panier() {
+		super();
+	}
 
 	// getters et setters
-	public LigneCommande getLc() {
-		return lc;
+	public LigneCommande getLigneCommande() {
+		return ligneCommande;
 	}
 
-	public void setLc(LigneCommande lc) {
-		this.lc = lc;
+	public void setLigneCommande(LigneCommande ligneCommande) {
+		this.ligneCommande = ligneCommande;
 	}
+
+	
 	
 	
 
