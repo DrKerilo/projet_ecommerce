@@ -1,12 +1,15 @@
 package fr.adaming.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,7 +27,9 @@ public class Client implements Serializable {
 	private String tel;
 	
 	// Transformation de l'association UML en Java
-	// OneToMany avec Commande
+	// OneToMany avec Commande (si on supprime le client, on supprime ses commandes)
+	@OneToMany(mappedBy="client",cascade=CascadeType.REMOVE)
+	private List<Commande> listeCommandes;
 	
 	// Constructeurs
 	public Client() {
