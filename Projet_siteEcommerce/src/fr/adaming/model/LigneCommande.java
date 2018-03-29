@@ -45,6 +45,18 @@ public class LigneCommande {
 	public void setPrix(int prix) {
 		this.prix = prix;
 	}
+	public Produit getProduit() {
+		return produit;
+	}
+	public void setProduit(Produit produit) {
+		this.produit = produit;
+	}
+	public Commande getCommande() {
+		return commande;
+	}
+	public void setCommande(Commande commande) {
+		this.commande = commande;
+	}
 	
 	
 	
