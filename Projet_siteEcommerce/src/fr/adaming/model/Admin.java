@@ -16,8 +16,8 @@ public class Admin {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_admin")
 	private int id;
-	public String mail;
-	public String mdp;
+	private String mail;
+	private String mdp;
 	
 	// association uml en java
 	
