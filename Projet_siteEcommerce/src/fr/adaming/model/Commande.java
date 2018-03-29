@@ -1,6 +1,7 @@
 package fr.adaming.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,7 +30,7 @@ public class Commande {
 	private Client client;
 	
 	@OneToMany(mappedBy="commande", cascade=CascadeType.REMOVE)
-	private LigneCommande ligneCommande;
+	private List<LigneCommande> listeLignesCommandes;
 	
 	// déclaration des constructeurs
 	public Commande() {
@@ -57,6 +58,18 @@ public class Commande {
 	}
 	public void setDateCommande(Date dateCommande) {
 		this.dateCommande = dateCommande;
+	}
+	public List<LigneCommande> getListeLignesCommandes() {
+		return listeLignesCommandes;
+	}
+	public void setListeLignesCommandes(List<LigneCommande> listeLignesCommandes) {
+		this.listeLignesCommandes = listeLignesCommandes;
+	}
+	public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
 	}
 	
 	
