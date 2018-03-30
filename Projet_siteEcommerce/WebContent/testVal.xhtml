@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Facelet</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem value="Consulter tout test" url="testVal.xhtml" />
+			<p:menuitem value="Ajouter test" url="ajout.xhtml" />
+			<p:menuitem value="Modifier test" url="update.xhtml" />
+			<p:menuitem value="Supprimer test" url="delete.xhtml" />
+			<p:menuitem value="Consulter test" url="search.xhtml" />
+		</p:breadCrumb>
+	</h:form>
+
+
+	<h:form>
+		<h:commandButton value="Consulter catégories"
+			action="#{categorieMB.consulterTout}" update="getall" />
+	</h:form>
+	<p:dataTable var="cat" value="#{categorieMB.listeCategories}"
+		id="getall">
+		<p:column headerText="Id">
+			<h:outputText value="#{cat.idCategorie}" />
+		</p:column>
+
+		<p:column headerText="Nom">
+			<h:outputText value="#{cat.nomCategorie}" />
+		</p:column>
+
+		<p:column headerText="Description">
+			<h:outputText value="#{cat.description}" />
+		</p:column>
+	</p:dataTable>
+
+	<h1>Test ajout</h1>
+	<hr />
+	<h:form>
+		<h:panelGrid columns="2">
+			Nom: <h:inputText value="#{categorieMB.categorie.nomCategorie}" />
+			Description: <h:inputText
+				value="#{categorieMB.categorie.description}" />
+			<h:commandButton value="Ajouter Catégorie"
+				action="#{categorieMB.ajouter}" />
+		</h:panelGrid>
+	</h:form>
+	<h:messages style="color:red" />
+
+	<h1>Test modifier</h1>
+	<hr />
+	<h:form>
+		<h:panelGrid columns="2">
+			ID: <h:inputText value="#{categorieMB.categorie.idCategorie}"/>
+			Nom: <h:inputText value="#{categorieMB.categorie.nomCategorie}" />
+			Description: <h:inputText
+				value="#{categorieMB.categorie.description}" />
+			<h:commandButton value="Modifier catégorie"
+				action="#{categorieMB.modifier}" />
+		</h:panelGrid>
+	</h:form>
+</h:body>
+</html>
