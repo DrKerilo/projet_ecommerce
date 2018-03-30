@@ -29,8 +29,7 @@ public class ProduitServiceImpl implements IProduitService{
 
 	@Override
 	public int update(Produit p) {
-		// TODO Auto-generated method stub
-		return 0;
+		return produitDao.update(p);
 	}
 	
 	@Override
@@ -40,17 +39,16 @@ public class ProduitServiceImpl implements IProduitService{
 
 	@Override
 	public List<Produit> getAll(Categorie cat) {
-		List<Produit> allProduitsCategorie = produitDao.getAll();
-		for(Produit p:allProduitsCategorie){
+		List<Produit> listeProduitsCategorie = produitDao.getAll();
+		for(Produit p:listeProduitsCategorie){
 			p.setCategorie(cat);
 		}
-		return allProduitsCategorie;
+		return listeProduitsCategorie;
 	}
 
 	@Override
 	public Produit get(Produit p) {
-		// TODO Auto-generated method stub
-		return null;
+		return produitDao.get(p);
 	}
 
 
