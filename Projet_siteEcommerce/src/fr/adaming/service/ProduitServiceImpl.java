@@ -39,11 +39,7 @@ public class ProduitServiceImpl implements IProduitService{
 
 	@Override
 	public List<Produit> getAll(Categorie cat) {
-		List<Produit> listeProduitsCategorie = produitDao.getAll();
-		for(Produit p:listeProduitsCategorie){
-			p.setCategorie(cat);
-		}
-		return listeProduitsCategorie;
+		return produitDao.getAll(cat);
 	}
 
 	@Override

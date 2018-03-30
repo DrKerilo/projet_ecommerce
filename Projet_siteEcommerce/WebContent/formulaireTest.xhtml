@@ -49,7 +49,7 @@ Consulter produit
 <h:form>
 		<h:panelGrid columns="2">
 		Id produit : <h:inputText value = "#{produitMB.produit.idProduit}"/>
-		<h:commandButton value ="Consulter produits" action ="#{produitMB.consulterToutByCategorie}"/>
+		<h:commandButton value ="Consulter produits" action ="#{produitMB.consulter}"/>
 		</h:panelGrid>
 </h:form>
 <br/>
@@ -81,7 +81,7 @@ Consulter produit par catégorie
 <h:form>
 		<h:panelGrid columns="2">
 		Catégorie : <h:inputText value = "#{produitMB.categorie.idCategorie}"/>
-		<h:commandButton value ="Consulter produits" action ="#{produitMB.consulterToutByCategorie}"/>
+		<h:commandButton value ="Consulter produits par catégorie" action ="#{produitMB.consulterToutByCategorie}"/>
 		</h:panelGrid>
 </h:form>
 <br/>
