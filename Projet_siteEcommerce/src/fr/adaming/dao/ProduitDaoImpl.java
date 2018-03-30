@@ -1,4 +1,4 @@
-package fr.adaming.Dao;
+package fr.adaming.dao;
 
 import java.util.List;
 
@@ -38,7 +38,18 @@ public class ProduitDaoImpl implements IProduitDao {
 	public int update(Produit p) {
 		// requête JPQL pour modifier un produit
 		String req = "UPDATE Produit p SET p.designation=:pDesignation, p.description=:pDescription, p.prix=:pPrix, p.quantite=:pQuantite, p.selectionne=:pSelectionne, p.photo=:pPhoto WHERE p.idProduit=:pIdProduit";
-		return 0;
+		
+		Query query = em.createQuery(req);
+
+		query.setParameter("pDesignation", p.getDesignation());
+		query.setParameter("pDescription", p.getDescription());
+		query.setParameter("pPrix", p.getPrix());
+		query.setParameter("pQuantite", p.getQuantite());
+		query.setParameter("pSelectionne", p.isSelectionne());
+		query.setParameter("pPhoto", p.getPhoto());
+		query.setParameter("pIdProduit", p.getIdProduit());
+
+		return query.executeUpdate();
 	}
 
 	@Override
@@ -55,14 +66,23 @@ public class ProduitDaoImpl implements IProduitDao {
 
 	@Override
 	public List<Produit> getAll(Categorie cat) {
-		// TODO Auto-generated method stub
-		return null;
+		// requête JPQL pour récupérer la liste de produits par catégorie
+		String req = "SELECT p FROM Produit p WHERE p.categorie.idCategorie=:pIdCategorie";
+		
+		// création d'un objet de type Query pour envoyer la requête JPQL
+		Query query = em.createQuery(req);
+		
+		// passage des paramètres
+		query.setParameter("pIdCategorie", cat.getIdCategorie());
+		
+		// envoyer la requête et retourner le résultat
+		return query.getResultList();
 	}
 
 	@Override
 	public Produit get(Produit p) {
-		// TODO Auto-generated method stub
-		return null;
+		Produit pOut = em.find(Produit.class, p.getIdProduit());
+		return pOut;
 	}
 
 }

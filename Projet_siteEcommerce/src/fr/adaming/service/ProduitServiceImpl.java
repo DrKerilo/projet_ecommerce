@@ -1,4 +1,4 @@
-package fr.adaming.Service;
+package fr.adaming.service;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 
-import fr.adaming.Dao.IProduitDao;
+import fr.adaming.dao.IProduitDao;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
@@ -40,8 +40,11 @@ public class ProduitServiceImpl implements IProduitService{
 
 	@Override
 	public List<Produit> getAll(Categorie cat) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Produit> allProduitsCategorie = produitDao.getAll();
+		for(Produit p:allProduitsCategorie){
+			p.setCategorie(cat);
+		}
+		return allProduitsCategorie;
 	}
 
 	@Override

@@ -11,9 +11,9 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import fr.adaming.Service.IProduitService;
 import fr.adaming.model.Client;
 import fr.adaming.model.Produit;
+import fr.adaming.service.IProduitService;
 
 @ManagedBean(name="produitMB")
 @RequestScoped
