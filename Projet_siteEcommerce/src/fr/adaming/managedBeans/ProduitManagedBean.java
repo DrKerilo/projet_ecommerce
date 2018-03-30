@@ -92,6 +92,18 @@ public class ProduitManagedBean implements Serializable{
 			return "testMethodes.xhtml";
 		}
 	}
+	
+	public String modifier(){
+		int verif = produitService.update(this.produit);
+		if(verif !=0){
+			this.listeProduits = produitService.getAll();
+			this.session.setAttribute("listeProduits", listeProduits);
+			return "testMethodes.xhtml";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Une erreur est survenue, produit non ajouté"));
+			return "testMethodes.xhtml";
+		}
+	}
 
 	
 
