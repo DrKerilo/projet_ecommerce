@@ -11,21 +11,22 @@
 </h:head>
 
 <h:body>
-<h:form>
-	<p:tabMenu activeIndex="#{param.i}">
-	    <p:menuitem value="accueil" action="#{produitMB.consulterTout}" icon="ui-icon-star">
-	        <f:param name="i" value="0" />
-	    </p:menuitem>
-	    <p:menuitem value="ajouter" url="ajouterTest.xhtml" icon="ui-icon-search">
-	        <f:param name="i" value="1" />
-	    </p:menuitem>
-	</p:tabMenu>
-</h:form>
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem value="Liste produits" url="testMethodes.xhtml" />
+			<p:menuitem value="Ajouter" url="formulaireTest.xhtml" />
+			<p:menuitem value="Modifier" url="formulaireTest.xhtml" />
+			<p:menuitem value="Supprimer" url="formulaireTest.xhtml" />
+			<p:menuitem value="Consulter" url="formulaireTest.xhtml" />
+			<p:menuitem value="Liste produits par catégorie" url="formulaireTest.xhtml" />
+		</p:breadCrumb>
+	</h:form>
 
 
 
 <h:form>
-	<p:dataTable var="produit" value="#{produitMB.listeProduits}">
+<h:commandButton value="Consulter produits" action="#{produitMB.consulterTout}" update="allProduits"/>
+	<p:dataTable var="produit" value="#{produitMB.listeProduits}" id="allProduits">
 	    <p:column headerText="Id">
 	        <h:outputText value="#{produit.idProduit}" />
 	    </p:column>
@@ -41,11 +42,11 @@
 	    <p:column headerText="quantite">
 	        <h:outputText value="#{produit.quantite}" />
 	    </p:column>
-	</p:dataTable>
-	<h:commandButton value="produits" action="#{produitMB.consulterTout}" update="@all"/>
+	</p:dataTable>	
 </h:form>
 
 <h:messages style="color:red"/>
+
 
 </h:body>
 </html>
