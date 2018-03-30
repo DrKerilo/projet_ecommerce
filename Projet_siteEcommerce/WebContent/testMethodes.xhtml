@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<TITLE>test</TITLE>
+</h:head>
+
+<h:body>
+<h:form>
+	<p:tabMenu activeIndex="#{param.i}">
+	    <p:menuitem value="accueil" action="#{produitMB.consulterTout}" icon="ui-icon-star">
+	        <f:param name="i" value="0" />
+	    </p:menuitem>
+	    <p:menuitem value="ajouter" url="ajouterTest.xhtml" icon="ui-icon-search">
+	        <f:param name="i" value="1" />
+	    </p:menuitem>
+	</p:tabMenu>
+</h:form>
+
+
+
+<h:form>
+	<p:dataTable var="produit" value="#{produitMB.listeProduits}">
+	    <p:column headerText="Id">
+	        <h:outputText value="#{produit.idProduit}" />
+	    </p:column>
+	 
+	    <p:column headerText="designation">
+	        <h:outputText value="#{produit.designation}" />
+	    </p:column>
+	 
+	    <p:column headerText="description">
+	        <h:outputText value="#{produit.description}" />
+	    </p:column>
+
+	    <p:column headerText="quantite">
+	        <h:outputText value="#{produit.quantite}" />
+	    </p:column>
+	</p:dataTable>
+	<h:commandButton value="produits" action="#{produitMB.consulterTout}" update="@all"/>
+</h:form>
+
+<h:messages style="color:red"/>
+
+</h:body>
+</html>
