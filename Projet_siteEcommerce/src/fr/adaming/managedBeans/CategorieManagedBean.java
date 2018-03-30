@@ -3,6 +3,7 @@ package fr.adaming.managedBeans;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -18,6 +19,7 @@ public class CategorieManagedBean {
 	// Attributs
 	private Categorie categorie;
 	private List<Categorie> listeCategories;
+	private boolean rendered;	// pour le rendered de la vue
 
 	// Transformation de l'association UML en Java
 	@EJB
@@ -26,6 +28,7 @@ public class CategorieManagedBean {
 	// Constructeur vide
 	public CategorieManagedBean() {
 		this.categorie = new Categorie();
+		this.rendered=false;
 	}
 
 	// Getters et setters
@@ -43,6 +46,12 @@ public class CategorieManagedBean {
 
 	public void setListeCategories(List<Categorie> listeCategories) {
 		this.listeCategories = listeCategories;
+	}
+	public boolean isRendered() {
+		return rendered;
+	}
+	public void setRendered(boolean rendered) {
+		this.rendered = rendered;
 	}
 
 	// Méthodes métiers
@@ -78,4 +87,27 @@ public class CategorieManagedBean {
 		}
 	}
 
+	public String supprimer() {
+		int verif = categorieService.delete(categorie);
+		if (verif != 0) {
+			// Récupérer la liste des catégories mise à jour
+			listeCategories = categorieService.getAll();
+			return "testVal";
+		} else {
+			// Si erreur
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La catégorie indiquée n'existe pas."));
+			return "testVal";
+		}
+	}
+	
+	public String consulter(){
+		try{
+			this.categorie=categorieService.get(categorie);
+			this.rendered=true;
+		} catch(EJBTransactionRolledbackException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La catégorie recherchée n'existe pas."));
+			this.rendered=false;
+		}
+		return "testVal";
+	}
 }

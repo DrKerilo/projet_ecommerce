@@ -12,15 +12,16 @@
 <h:body>
 	<h:form>
 		<p:breadCrumb>
-			<p:menuitem value="Consulter tout test" url="testVal.xhtml" />
-			<p:menuitem value="Ajouter test" url="ajout.xhtml" />
-			<p:menuitem value="Modifier test" url="update.xhtml" />
-			<p:menuitem value="Supprimer test" url="delete.xhtml" />
-			<p:menuitem value="Consulter test" url="search.xhtml" />
+			<p:menuitem value="Test" url="testVal.xhtml" />
+			<p:menuitem value="Test" url="testVal.xhtml" />
+			<p:menuitem value="Test" url="testVal.xhtml" />
+			<p:menuitem value="Test" url="testVal.xhtml" />
+			<p:menuitem value="Test" url="testVal.xhtml" />
 		</p:breadCrumb>
 	</h:form>
 
-
+	<h1>Test consulterTout</h1>
+	<hr />
 	<h:form>
 		<h:commandButton value="Consulter catégories"
 			action="#{categorieMB.consulterTout}" update="getall" />
@@ -57,7 +58,7 @@
 	<hr />
 	<h:form>
 		<h:panelGrid columns="2">
-			ID: <h:inputText value="#{categorieMB.categorie.idCategorie}"/>
+			ID: <h:inputText value="#{categorieMB.categorie.idCategorie}" />
 			Nom: <h:inputText value="#{categorieMB.categorie.nomCategorie}" />
 			Description: <h:inputText
 				value="#{categorieMB.categorie.description}" />
@@ -65,5 +66,39 @@
 				action="#{categorieMB.modifier}" />
 		</h:panelGrid>
 	</h:form>
+
+	<h1>Test supprimer</h1>
+	<hr />
+	<h:form>
+		<h:panelGrid columns="2">
+			ID: <h:inputText value="#{categorieMB.categorie.idCategorie}" />
+			<h:commandButton value="Supprimer catégorie"
+				action="#{categorieMB.supprimer}" />
+		</h:panelGrid>
+	</h:form>
+	
+	<h1>Test consulter</h1>
+	<hr />
+	<h:form>
+		<h:panelGrid columns="2">
+			ID: <h:inputText value="#{categorieMB.categorie.idCategorie}" />
+			<h:commandButton value="Consulter catégorie"
+				action="#{categorieMB.consulter}" update="getCat" />
+		</h:panelGrid>
+	</h:form>
+	<p:dataTable var="c" value="#{categorieMB.listeCategories}"
+		id="getCat" rendered="#{categorieMB.rendered}">
+		<p:column headerText="Id">
+			<h:outputText value="#{c.idCategorie}" />
+		</p:column>
+
+		<p:column headerText="Nom">
+			<h:outputText value="#{c.nomCategorie}" />
+		</p:column>
+
+		<p:column headerText="Description">
+			<h:outputText value="#{c.description}" />
+		</p:column>
+	</p:dataTable>
 </h:body>
 </html>

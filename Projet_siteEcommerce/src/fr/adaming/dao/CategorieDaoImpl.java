@@ -2,6 +2,7 @@ package fr.adaming.dao;
 
 import java.util.List;
 
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -49,14 +50,26 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public int delete(Categorie c) {
-		// TODO Auto-generated method stub
-		return 0;
+		// Requête JPQL
+		String req="DELETE FROM Categorie c WHERE c.idCategorie=:pId";
+		// Query
+		Query q=em.createQuery(req);
+		// Passage des paramètres
+		q.setParameter("pId", c.getIdCategorie());
+		// Envoi requête et récup nombre de lignes modifiées
+		return q.executeUpdate();
 	}
 
 	@Override
-	public Categorie get(Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+	public Categorie get(Categorie c) throws EJBTransactionRolledbackException {
+		// Requête JPQL
+		String req="SELECT c FROM Categorie c WHERE c.idCategorie=:pId";
+		// Query
+		Query q=em.createQuery(req);
+		// Passage des paramètres
+		q.setParameter("pId", c.getIdCategorie());
+		// Envoi et récupération du résultat
+		return (Categorie) q.getSingleResult();
 	}
 
 }

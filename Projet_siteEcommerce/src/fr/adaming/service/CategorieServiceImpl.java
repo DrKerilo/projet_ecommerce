@@ -3,6 +3,7 @@ package fr.adaming.service;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Stateful;
 
 import fr.adaming.dao.ICategorieDao;
@@ -32,14 +33,12 @@ public class CategorieServiceImpl implements ICategorieService {
 
 	@Override
 	public int delete(Categorie c) {
-		// TODO Auto-generated method stub
-		return 0;
+		return categorieDao.delete(c);
 	}
 
 	@Override
-	public Categorie get(Categorie c) {
-		// TODO Auto-generated method stub
-		return null;
+	public Categorie get(Categorie c) throws EJBTransactionRolledbackException {
+		return categorieDao.get(c);
 	}
 
 }

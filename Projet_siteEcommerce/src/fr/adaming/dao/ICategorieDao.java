@@ -2,6 +2,7 @@ package fr.adaming.dao;
 
 import java.util.List;
 
+import javax.ejb.EJBTransactionRolledbackException;
 import javax.ejb.Local;
 
 import fr.adaming.model.Categorie;
@@ -17,6 +18,6 @@ public interface ICategorieDao {
 	
 	public int delete(Categorie c);
 	
-	public Categorie get(Categorie c);
+	public Categorie get(Categorie c) throws EJBTransactionRolledbackException;
 
 }
