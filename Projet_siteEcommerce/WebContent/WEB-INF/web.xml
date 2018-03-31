@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-  <display-name>Projet_siteEcommerce</display-name>
-  
-  <!-- Déclaration de la servlet unique -->
-  <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  
-  <!-- Mapping de la servlet unique -->
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.xhtml</url-pattern>
-  </servlet-mapping>
-  
-  <!-- Phase du projet -->
-  <context-param>
-  	<param-name>javax.faces.PROJECT_STAGE</param-name>
-  	<param-value>Development</param-value>
-  </context-param>
-  
-  <!-- Page d'accueil -->
-  <welcome-file-list>
-  	<welcome-file>testMethodes.xhtml</welcome-file>
-  	<welcome-file>testVal.xhtml</welcome-file>
-  </welcome-file-list>
-  
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>Projet_siteEcommerce</display-name>
+
+	<!-- Déclaration de la servlet unique -->
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Mapping de la servlet unique -->
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+
+	<!-- Phase du projet -->
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+
+	<!-- Charger le thème de Primefaces -->
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>ui-lightness</param-value>
+	</context-param>
+
+	<!-- Page d'accueil -->
+	<welcome-file-list>
+		<welcome-file>testMethodes.xhtml</welcome-file>
+	</welcome-file-list>
+
 </web-app>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Header</title>
+</h:head>
+<h:body>
+
+	<!-- Définition du contenu du header grâce à la balise ui:composition -->
+	<ui:composition>
+		<div
+			style="width: 450px; margin-left: auto; margin-right: auto; margin-top: 20px; text-align: center">
+			<h:graphicImage library="images" name="logoOriga.jpg" />
+		</div>
+		<h:form>
+			<p:growl id="messages" />
+
+			<p:menubar style="padding:10px;background:#f6a828;border:1px solid #F77A10">
+			
+				<p:menuitem value="Accueil" url="accueil.xhtml" icon="ui-icon-home"/>
+				
+				<p:submenu label="Comptes bancaires">
+					<p:submenu label="Comptes courants"
+						icon="ui-icon-arrowreturnthick-1-e">
+						<p:menuitem value="Ajouter" url="addcc.xhtml"
+							icon="ui-icon-plusthick" />
+						<p:menuitem value="Supprimer" url="delcc.xhtml"
+							icon="ui-icon-closethick" />
+						<p:menuitem value="Modifier" url="upcc.xhtml"
+							icon="ui-icon-transferthick-e-w" />
+						<p:menuitem value="Chercher" url="schcc.xhtml"
+							icon="ui-icon-search" />
+						<p:separator />
+						<p:menuitem value="Attribuer à un client" url="assigncc.xhtml"
+							icon="ui-icon-person" />
+					</p:submenu>
+					<p:submenu label="Comptes d'épargne"
+						icon="ui-icon-arrowreturnthick-1-e">
+						<p:menuitem value="Ajouter" url="addce.xhtml"
+							icon="ui-icon-plusthick" />
+						<p:menuitem value="Supprimer" url="delce.xhtml"
+							icon="ui-icon-closethick" />
+						<p:menuitem value="Modifier" url="upce.xhtml"
+							icon="ui-icon-transferthick-e-w" />
+						<p:menuitem value="Chercher" url="schce.xhtml"
+							icon="ui-icon-search" />
+						<p:separator />
+						<p:menuitem value="Attribuer à un client" url="assignce.xhtml"
+							icon="ui-icon-person" />
+					</p:submenu>
+				</p:submenu>
+
+				<p:submenu label="Transactions">
+					<p:menuitem value="Retrait" url="withdraw.xhtml"
+						icon="ui-icon-arrowthickstop-1-n" />
+					<p:menuitem value="Dépôt" url="deposit.xhtml"
+						icon="ui-icon-arrowthickstop-1-s" />
+					<p:menuitem value="Virement" url="transfer.xhtml"
+						icon="ui-icon-arrowthickstop-1-e" />
+				</p:submenu>
+
+				<f:facet name="options">
+					<p:commandButton value="Panier" icon="ui-icon-cart"
+						action="#" style="background:#E5EC9E;color:#333333"/>
+				</f:facet>
+			</p:menubar>
+			<p:selectOneMenu value="#{categorieMB.categorie.nomCategorie}">
+					<f:selectItem itemLabel="Consulter les catégories" itemValue="" noSelectionOption="true"/>
+					<f:selectItems value="#{categorieMB.listeCategories}" var="cat" itemValue="#{cat.nomCategorie}"/>
+				</p:selectOneMenu>
+		</h:form>
+	</ui:composition>
+
+</h:body>
+</html>
