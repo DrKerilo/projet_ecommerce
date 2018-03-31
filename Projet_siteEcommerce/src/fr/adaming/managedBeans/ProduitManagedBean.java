@@ -81,7 +81,7 @@ public class ProduitManagedBean implements Serializable{
 		}
 	}
 	public String ajouter(){
-		Produit pAjoute = produitService.add(this.produit);
+		Produit pAjoute = produitService.add(this.produit, this.categorie);
 		if(pAjoute != null){
 			this.listeProduits = produitService.getAll();
 			return "testMethodes.xhtml";
@@ -103,7 +103,7 @@ public class ProduitManagedBean implements Serializable{
 	}
 	
 	public String modifier(){
-		int verif = produitService.update(this.produit);
+		int verif = produitService.update(this.produit, this.categorie);
 		if(verif !=0){
 			this.listeProduits = produitService.getAll();
 			return "testMethodes.xhtml";
@@ -111,6 +111,11 @@ public class ProduitManagedBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Une erreur est survenue, produit non modifié"));
 			return "testMethodes.xhtml";
 		}
+	}
+	
+	public void getByIdEvent(){
+		
+		this.produit=produitService.get(this.produit);
 	}
 	
 	public String consulter(){

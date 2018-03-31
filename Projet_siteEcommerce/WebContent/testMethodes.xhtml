@@ -42,6 +42,10 @@
 	    <p:column headerText="quantite">
 	        <h:outputText value="#{produit.quantite}" />
 	    </p:column>
+	    
+	    <p:column headerText="catégorie">
+	        <h:outputText value="#{produit.categorie.idCategorie}" />
+	    </p:column>
 	</p:dataTable>	
 </h:form>
 

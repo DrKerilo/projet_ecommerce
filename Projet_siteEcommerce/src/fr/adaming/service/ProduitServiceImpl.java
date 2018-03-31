@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
-import javax.ejb.Stateless;
 
 import fr.adaming.dao.IProduitDao;
 import fr.adaming.model.Categorie;
@@ -18,7 +17,8 @@ public class ProduitServiceImpl implements IProduitService{
 	private IProduitDao produitDao;
 
 	@Override
-	public Produit add(Produit p) {
+	public Produit add(Produit p, Categorie categorie) {
+		p.setCategorie(categorie);
 		return produitDao.add(p);
 	}
 
@@ -28,7 +28,8 @@ public class ProduitServiceImpl implements IProduitService{
 	}
 
 	@Override
-	public int update(Produit p) {
+	public int update(Produit p, Categorie categorie) {
+		p.setCategorie(categorie);
 		return produitDao.update(p);
 	}
 	
@@ -38,8 +39,8 @@ public class ProduitServiceImpl implements IProduitService{
 	}
 
 	@Override
-	public List<Produit> getAll(Categorie cat) {
-		return produitDao.getAll(cat);
+	public List<Produit> getAll(Categorie categorie) {
+		return produitDao.getAll(categorie);
 	}
 
 	@Override

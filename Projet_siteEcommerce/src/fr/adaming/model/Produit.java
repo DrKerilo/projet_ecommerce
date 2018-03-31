@@ -28,7 +28,7 @@ public class Produit implements Serializable {
 	private String description;
 	private double prix;
 	private int quantite;
-	@Column(columnDefinition = "TINYINT(1)'")
+	@Column(columnDefinition = "TINYINT(1)")
 	private boolean selectionne;
 	@Lob
 	private byte[] photo;

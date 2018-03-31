@@ -37,7 +37,7 @@ public class ProduitDaoImpl implements IProduitDao {
 	@Override
 	public int update(Produit p) {
 		// requête JPQL pour modifier un produit
-		String req = "UPDATE Produit p SET p.designation=:pDesignation, p.description=:pDescription, p.prix=:pPrix, p.quantite=:pQuantite, p.selectionne=:pSelectionne, p.photo=:pPhoto WHERE p.idProduit=:pIdProduit";
+		String req = "UPDATE Produit p SET p.designation=:pDesignation, p.description=:pDescription, p.prix=:pPrix, p.quantite=:pQuantite, p.selectionne=:pSelectionne, p.photo=:pPhoto, p.categorie=:pCategorie WHERE p.idProduit=:pIdProduit";
 		
 		Query query = em.createQuery(req);
 
@@ -47,6 +47,7 @@ public class ProduitDaoImpl implements IProduitDao {
 		query.setParameter("pQuantite", p.getQuantite());
 		query.setParameter("pSelectionne", p.isSelectionne());
 		query.setParameter("pPhoto", p.getPhoto());
+		query.setParameter("pCategorie", p.getCategorie().getIdCategorie());
 		query.setParameter("pIdProduit", p.getIdProduit());
 
 		return query.executeUpdate();
@@ -65,7 +66,7 @@ public class ProduitDaoImpl implements IProduitDao {
 	}
 
 	@Override
-	public List<Produit> getAll(Categorie cat) {
+	public List<Produit> getAll(Categorie categorie) {
 		// requête JPQL pour récupérer la liste de produits par catégorie
 		String req = "SELECT p FROM Produit p WHERE p.categorie.idCategorie=:pIdCategorie";
 		
@@ -73,7 +74,7 @@ public class ProduitDaoImpl implements IProduitDao {
 		Query query = em.createQuery(req);
 		
 		// passage des paramètres
-		query.setParameter("pIdCategorie", cat.getIdCategorie());
+		query.setParameter("pIdCategorie", categorie.getIdCategorie());
 		
 		// envoyer la requête et retourner le résultat
 		return query.getResultList();
