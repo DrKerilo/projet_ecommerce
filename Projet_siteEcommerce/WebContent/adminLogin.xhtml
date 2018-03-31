@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<TITLE>admin login</TITLE>
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<h:panelGrid columns="2">
+			Mail : <h:inputText value ="#{adminMB.admin.mail}"/>
+			Mot de passe : <h:inputSecret value = "#{adminMB.admin.mdp}"/>
+			<h:commandButton value ="Se connecter" action ="#{adminMB.SeConnecter}"/>
+		</h:panelGrid>
+	</h:form>
+
+<h:messages style="color:red"/>
+
+
+</h:body>
+</html>

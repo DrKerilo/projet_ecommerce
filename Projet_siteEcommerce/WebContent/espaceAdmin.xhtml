@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<TITLE>login facelet</TITLE>
+</h:head>
+
+<h:body>
+<header style="font-size: 54px; text-align: center">Espace administrateur</header>
+<h:commandButton value = "Se déconnecter" action="#{aMB.seDeconnecter}"/>
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem value="Liste catégories" url="testVal.xhtml" />
+			<p:menuitem value="Liste produits" url="testMethodes.xhtml" />
+			<p:menuitem value="Liste produits par catégorie" url="formulaireTest.xhtml" />
+			<p:menuitem value="Ajouter" url="formulaireTest.xhtml" />
+			<p:menuitem value="Modifier" url="formulaireTest.xhtml" />
+			<p:menuitem value="Supprimer" url="formulaireTest.xhtml" />
+			<p:menuitem value="Consulter un produit" url="formulaireTest.xhtml" />			
+		</p:breadCrumb>
+		<h:commandButton value = "Se déconnecter" action="#{aMB.seDeconnecter}"/>
+	</h:form>
+</h:body>
+</html>

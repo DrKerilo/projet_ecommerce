@@ -8,7 +8,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-import fr.adaming.dao.IAdminDao;
 import fr.adaming.model.Admin;
 import fr.adaming.model.Categorie;
 import fr.adaming.service.IAdminService;
@@ -60,17 +59,17 @@ public class AdminManagedBean {
 			// ajouter dans la session
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("adminSession", aOut);
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("listeCategories", listeCategories);
-			return "succes";
+			return "espaceAdmin";
 		} catch (Exception ex) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Admin introuvable"));
 		}
-		return "echec";
+		return "adminLogin";
 	}
 	
 	public String seDeconnecter(){
 		// fermer la session Http courante
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "login";
+		return "testMethodes";
 	}
 	
 }
