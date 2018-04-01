@@ -10,10 +10,15 @@
 	<title>L'Origa - Accueil</title>
 </h:head>
 <h:body>
-	<ui:insert>
-		<ui:include src="/resources/templates/headerfront.xhtml"></ui:include>
-	</ui:insert>
 
-
+	<!-- Inclure le templace dans la page accueil avec possibilité de modification -->
+	<ui:composition template="/resources/templates/layoutfront.xhtml">
+		<!-- Modifier la partie "body.html" -->
+		<ui:define name="bodyFront">
+			<h1>Ceci est le corps spécifique à la page accueil</h1>
+			<h1>Youpi !</h1>
+		</ui:define>
+	</ui:composition>
+	
 </h:body>
 </html>
