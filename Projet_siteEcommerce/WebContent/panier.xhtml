@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<TITLE>panier</TITLE>
+</h:head>
+
+<h:body>
+  <form action="/checkout" method="post" id="cart">
+
+            <ul data-money-format="€{{amount}}" data-shop-currency="EUR" data-shop-name="Feed. ">
+              <li class="mm-subtitle"><a class="continue ss-icon" href="#cart">&#x2421;</a></li>
+
+              
+                
+                
+                
+                  <li class="cart_item ">
+                    
+                      <p class="mm-counter">
+                          <span>6</span>
+                      </p>
+                      <a href="#">
+                          
+                          <div class="cart_image">
+                              <img src="//cdn.shopify.com/s/files/1/1636/6633/products/ready_to_eat_banana_e621b47a-97bf-4655-8430-7ca63f28a775_medium.png?v=1505764767" alt="Banane Choco - 1 repas complet (2.98€/repas)" />
+                          </div>
+                          
+                          <div class="item_title">Banane Choco</div>
+                          <strong class="price">€2.98</strong>
+                      </a>
+                    
+                  </li>
+                
+                  <li class="cart_item ">
+                    
+                      <p class="mm-counter">
+                          <span>5</span>
+                      </p>
+                      <a href="#">
+                          
+                          <div class="cart_image">
+                              <img src="//cdn.shopify.com/s/files/1/1636/6633/products/ready_to_eat_choco_cocos_321ea9fa-26a2-40a2-ad35-685788e348d7_medium.png?v=1505764915" alt="Coco Choco - 1 repas complet (2.98€/repas)" />
+                          </div>
+                          
+                          <div class="item_title">Coco Choco - 1 repas complet (2.98€/repas)</div>
+                          <strong class="price">€2.98</strong>
+                      </a>
+                    
+                  </li>
+                
+                  <li class="cart_item ">
+                    
+                      <p class="mm-counter">
+                          <span>4</span>
+                      </p>
+                      <a href="#">
+                          
+                          <div class="cart_image">
+                              <img src="//cdn.shopify.com/s/files/1/1636/6633/products/poutch_noisette_WEB_642a0e4f-b385-4fe1-ab49-855f2521ee11_medium.png?v=1516099391" alt="Chocolat Noisettes - 4 repas complets (3,9€/repas)" />
+                          </div>
+                          
+                          <div class="item_title">Chocolat Noisettes - 4 repas complets (3,9€/repas)</div>
+                          <strong class="price">€15.75</strong>
+                      </a>
+                    
+                  </li>
+                
+                  <li class="cart_item last_cart_item">
+                    
+                      <p class="mm-counter">
+                          <span>1</span>
+                      </p>
+                      <a href="#">
+                          
+                          <div class="cart_image">
+                              <img src="//cdn.shopify.com/s/files/1/1636/6633/products/Feed._pack_test_medium.png?v=1505900141" alt="PACK TEST" />
+                          </div>
+                          
+                          <div class="item_title">PACK TEST</div>
+                          <strong class="price">€19.90</strong>
+                      </a>
+                    
+                  </li>
+                
+                <li class="mm-label">
+                  <p class="mm-counter">€115.68</p>
+                  <a href="#">
+                    <strong>Sous total / Subtotal</strong>
+                  </a>
+                </li>
+
+                <li class="mm-subtitle clearfix">
+                  
+
+                  
+
+                    <input type="submit" class="action_button right" value="Payer" />
+                    <a href="/cart/clear" class="action_button right" style='background-color: #000 !important;'>Vider le panier</a>
+                    <a href="javascript:void(0)" class="action_button edit_cart right">Continuer les achats</a>
+                </li>
+              
+            </ul>
+          </form>
+
+</h:body>
+</html>

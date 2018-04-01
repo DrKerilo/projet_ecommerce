@@ -1,7 +1,5 @@
 package fr.adaming.model;
 
-import javax.persistence.OneToMany;
-
 public class Panier {
 	
 	// association uml en java
