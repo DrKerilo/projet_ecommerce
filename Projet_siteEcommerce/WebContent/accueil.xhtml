@@ -8,6 +8,7 @@
 
 <h:head>
 	<title>L'Origa - Accueil</title>
+	<h:outputStylesheet library="css" name="customStyle.css"/>
 </h:head>
 <h:body>
 
@@ -15,8 +16,8 @@
 	<ui:composition template="/resources/templates/layoutfront.xhtml">
 		<!-- Modifier la partie "body.html" -->
 		<ui:define name="bodyFront">
-			<h1>Ceci est le corps spécifique à la page accueil</h1>
-			<h1>Youpi !</h1>
+			<h1 style="font-family:Century Gothic;color:#333333;text-align:center">Bienvenue chez L'Origa, votre magasin d'ameublement et de décoration d'intérieur</h1>
+			<div style="text-align:center;margin-top:50px"><h:graphicImage library="images" name="decoration-salon-japonais.jpeg"/></div>
 		</ui:define>
 	</ui:composition>
 	

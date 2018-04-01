@@ -51,7 +51,7 @@ public class AdminManagedBean {
 	}
 	
 	// méthode du managedBean
-	public String SeConnecter(){
+	public String seConnecter(){
 		try {
 			Admin aOut = adminService.isExist(this.admin);
 			listeCategories = categorieService.getAll();
@@ -63,7 +63,7 @@ public class AdminManagedBean {
 		} catch (Exception ex) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Admin introuvable"));
 		}
-		return "adminLogin";
+		return "#";
 	}
 	
 	public String seDeconnecter(){

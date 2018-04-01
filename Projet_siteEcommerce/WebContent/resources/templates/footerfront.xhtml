@@ -14,11 +14,11 @@
 	<ui:composition>
 		<h:form>
 			<h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();"
-				title="login">
-				<span>Espace administrateur</span>
+				title="login" style="text-decoration:none;color:#333333;font-family:Century Gothic;font-weight:bold">
+				<span>Accès à l'espace administrateur</span>
 			</h:outputLink>
 
-			<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+			<p:growl id="growl" summary="true" life="3000" />
 
 			<p:dialog header="Authentification" widgetVar="dlg" resizable="false">
 				<h:panelGrid columns="2" cellpadding="5">
@@ -32,7 +32,7 @@
 
 					<f:facet name="footer">
 						<p:commandButton value="Se connecter en tant qu'administrateur" update="growl"
-							actionListener="#{adminMB.SeConnecter}"
+							action="#{adminMB.seConnecter}"
 							oncomplete="handleLoginRequest(xhr, status, args)" />
 					</f:facet>
 				</h:panelGrid>
@@ -45,9 +45,6 @@
 					PF('dlg').jq.effect("shake", {
 						times : 5
 					}, 100);
-				} else {
-					PF('dlg').hide();
-					$('#loginLink').fadeOut();
 				}
 			}
 		</script>
