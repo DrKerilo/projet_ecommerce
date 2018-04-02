@@ -7,23 +7,29 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<TITLE>login facelet</TITLE>
+	<TITLE>login facelet</TITLE>
 </h:head>
 
 <h:body>
-<header style="font-size: 54px; text-align: center">Espace administrateur</header>
-<h:commandButton value = "Se déconnecter" action="#{adminMB.seDeconnecter}"/>
+	<header style="font-size: 54px; text-align: center">Espace
+		administrateur</header>
 	<h:form>
 		<p:breadCrumb>
-			<p:menuitem value="Liste catégories" url="testVal.xhtml" />
-			<p:menuitem value="Liste produits" url="testMethodes.xhtml" />
-			<p:menuitem value="Liste produits par catégorie" url="formulaireTest.xhtml" />
-			<p:menuitem value="Ajouter" url="formulaireTest.xhtml" />
-			<p:menuitem value="Modifier" url="formulaireTest.xhtml" />
-			<p:menuitem value="Supprimer" url="formulaireTest.xhtml" />
-			<p:menuitem value="Consulter un produit" url="formulaireTest.xhtml" />			
+			<p:menuitem value="Accueil espace administrateur" url="espaceAdmin.xhtml" />
+			<p:menuitem value="Consulter catégories" url="testMethodes.xhtml" />
+			<p:menuitem value="Ajouter catégorie" url="testVal.xhtml" />
+			<p:menuitem value="Modifier catégorie" url="testVal.xhtml" />
+			<p:menuitem value="Supprimer catégorie" url="testVal.xhtml" />
+			<p:menuitem value="Consulter produits" url="testMethodes.xhtml" />
+			<p:menuitem value="Ajouter produit" url="formulaireTest.xhtml" />
+			<p:menuitem value="Modifier produit" url="formulaireTest.xhtml" />
+			<p:menuitem value="Supprimer produit" url="formulaireTest.xhtml" />
 		</p:breadCrumb>
-		<h:commandButton value = "Se déconnecter" action="#{adminMB.seDeconnecter}"/>
 	</h:form>
+	<h:form>
+		<h:commandButton value="Se déconnecter"
+			action="#{adminMB.seDeconnecter}" />
+	</h:form>
+
 </h:body>
 </html>

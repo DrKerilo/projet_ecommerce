@@ -81,7 +81,7 @@ public class ProduitManagedBean implements Serializable{
 		}
 	}
 	public String ajouter(){
-		Produit pAjoute = produitService.add(this.produit, this.categorie);
+		Produit pAjoute = produitService.add(this.produit, this.produit.getCategorie());
 		if(pAjoute != null){
 			this.listeProduits = produitService.getAll();
 			return "testMethodes.xhtml";
@@ -103,7 +103,7 @@ public class ProduitManagedBean implements Serializable{
 	}
 	
 	public String modifier(){
-		int verif = produitService.update(this.produit, this.categorie);
+		int verif = produitService.update(this.produit, this.produit.getCategorie());
 		if(verif !=0){
 			this.listeProduits = produitService.getAll();
 			return "testMethodes.xhtml";

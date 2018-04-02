@@ -11,6 +11,15 @@
 </h:head>
 
 <h:body>
+
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem value="Liste catégories" url="testVal.xhtml" />
+			<p:menuitem value="Liste produits par catégorie" url="testMethodes.xhtml" />
+			<p:menuitem value="Espace administrateur" url="adminLogin.xhtml" />
+		</p:breadCrumb>
+	</h:form>
+	
 Ajouter
 <h:form>
 		<h:panelGrid columns="2">
@@ -19,7 +28,7 @@ Ajouter
 		prix : <h:inputText value="#{produitMB.produit.prix}" />
 		quantité : <h:inputText value="#{produitMB.produit.quantite}" />
 		catégorie : <h:selectOneMenu
-				value="#{produitMB.categorie.idCategorie}">
+				value="#{categorieMB.categorie.idCategorie}">
 				<f:selectItems value="#{sessionScope.listeCategories}" var="cat"
 					itemLabel="#{cat.nomCategorie}" itemValue="#{cat.idCategorie}" />
 			</h:selectOneMenu>
