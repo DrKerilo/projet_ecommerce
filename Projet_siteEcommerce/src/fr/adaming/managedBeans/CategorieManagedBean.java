@@ -87,11 +87,11 @@ public class CategorieManagedBean {
 			// Récupérer la liste des catégories mise à jour
 			listeCategories = categorieService.getAll();
 			this.session.setAttribute("listeCategories", listeCategories);
-			return "testVal";
+			return "espaceAdmin";
 		} else {
 			// Si erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur dans l'ajout."));
-			return "testVal";
+			return "#";
 		}
 	}
 

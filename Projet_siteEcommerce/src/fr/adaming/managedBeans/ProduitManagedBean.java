@@ -83,10 +83,10 @@ public class ProduitManagedBean implements Serializable{
 		Produit pAjoute = produitService.add(this.produit, this.produit.getCategorie());
 		if(pAjoute != null){
 			this.listeProduits = produitService.getAll();
-			return "testMethodes.xhtml";
+			return "espaceAdmin.xhtml";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Une erreur est survenue, produit non ajouté"));
-			return "testMethodes.xhtml";
+			return "#";
 		}
 	}
 	

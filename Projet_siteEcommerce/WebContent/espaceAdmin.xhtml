@@ -8,10 +8,8 @@
 
 <h:head>
 	<title>Espace administrateur</title>
-	<TITLE>login facelet</TITLE>
 </h:head>
 <h:body>
-
 	<!-- Inclure le templace dans la page avec possibilité de modification -->
 	<ui:composition template="/resources/templates/layoutadmin.xhtml">
 		<!-- Modifier la partie "body.html" -->
@@ -34,9 +32,6 @@
 
 				<!-- Affichage des catégories -->
 				<p:layoutUnit position="center">
-					<h:form>
-
-					</h:form>
 					<h:form id="form">
 						<p:growl id="msgs" showDetail="true" />
 
@@ -117,25 +112,5 @@
 
 		</ui:define>
 	</ui:composition>
-	<header style="font-size: 54px; text-align: center">Espace
-		administrateur</header>
-	<h:form>
-		<p:breadCrumb>
-			<p:menuitem value="Accueil espace administrateur" url="espaceAdmin.xhtml" />
-			<p:menuitem value="Consulter catégories" url="testMethodes.xhtml" />
-			<p:menuitem value="Ajouter catégorie" url="testVal.xhtml" />
-			<p:menuitem value="Modifier catégorie" url="testVal.xhtml" />
-			<p:menuitem value="Supprimer catégorie" url="testVal.xhtml" />
-			<p:menuitem value="Consulter produits" url="testMethodes.xhtml" />
-			<p:menuitem value="Ajouter produit" url="formulaireTest.xhtml" />
-			<p:menuitem value="Modifier produit" url="formulaireTest.xhtml" />
-			<p:menuitem value="Supprimer produit" url="formulaireTest.xhtml" />
-		</p:breadCrumb>
-	</h:form>
-	<h:form>
-		<h:commandButton value="Se déconnecter"
-			action="#{adminMB.seDeconnecter}" />
-	</h:form>
-
 </h:body>
 </html>

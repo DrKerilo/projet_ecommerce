@@ -7,11 +7,53 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>Facelet</title>
+	<title>Facelet</title>
 </h:head>
 <h:body>
-
-
-
+	<!-- Inclure le template dans la page avec possibilité de modification -->
+	<ui:composition template="/resources/templates/layoutadmin.xhtml">
+		<!-- Modifier la partie "body.html" -->
+		<ui:define name="bodyAdmin">
+			<p:tabView style="height:100%;width:100%;margin:auto">
+				<p:tab title="Ajouter une catégorie">
+					<h:form>
+						<p:growl id="growl" summary="true" life="3000" />
+						<h:panelGrid columns="2">
+							<h:outputLabel for="nameCat" value="Nom de la catégorie:" />
+							<p:inputText id="nameCat"
+								value="#{categorieMB.categorie.nomCategorie}" />
+							<h:outputLabel for="descCat" value="Description" />
+							<p:inputText id="descCat"
+								value="#{categorieMB.categorie.description}" />
+							<p:commandButton value="Ajouter Catégorie"
+								action="#{categorieMB.ajouter}" update="growl" />
+						</h:panelGrid>
+					</h:form>
+					<h:messages style="color:red" />
+				</p:tab>
+				<p:tab title="Ajouter un produit">
+					<h:form>
+						<h:panelGrid columns="2">
+							<h:outputLabel for="nameCat" value="Nom du produit:" />
+							<p:inputText value="#{produitMB.produit.designation}" />
+							<h:outputLabel for="nameCat" value="Description:" />
+							<p:inputText value="#{produitMB.produit.description}" />
+							<h:outputLabel for="nameCat" value="Prix (€):" />
+							<p:inputNumber value="#{produitMB.produit.prix}" />
+							<h:outputLabel for="nameCat" value="Quantité en stock:" />
+							<p:inputText value="#{produitMB.produit.quantite}" />
+							<h:outputLabel for="nameCat" value="Catégorie du produit:" />
+							<p:selectOneMenu value="#{sessionScope.listeCategories}">
+								<f:selectItems value="#{sessionScope.listeCategories}" var="cat"
+									itemLabel="#{cat.nomCategorie}"
+									itemValue="#{cat.idCategorie}" />
+							</p:selectOneMenu>
+							<h:commandButton value="Ajouter" action="#{produitMB.ajouter}" />
+						</h:panelGrid>
+					</h:form>
+				</p:tab>
+			</p:tabView>
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>
