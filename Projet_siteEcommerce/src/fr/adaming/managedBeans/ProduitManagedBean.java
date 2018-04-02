@@ -103,7 +103,7 @@ public class ProduitManagedBean implements Serializable{
 	}
 	
 	public String modifier(){
-		int verif = produitService.update(this.produit, this.produit.getCategorie());
+		int verif = produitService.update(this.produit, this.categorie);
 		if(verif !=0){
 			this.listeProduits = produitService.getAll();
 			return "testMethodes.xhtml";
