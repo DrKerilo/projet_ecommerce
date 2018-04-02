@@ -42,11 +42,16 @@
 <h1>Consulter produit par catégorie</h1>
 <h:form>
 		<h:panelGrid columns="2">
-		Catégorie : <h:inputText value="#{produitMB.categorie.idCategorie}" />
-			<h:commandButton value="Consulter produits par catégorie"
+		Catégorie : 
+		<h:selectOneMenu
+				value="#{categorieMB.categorie.idCategorie}">
+				<f:selectItems value="#{sessionScope.listeCategories}" var="cat"
+					itemLabel="#{cat.nomCategorie}" itemValue="#{produitMB.categorie.idCategorie}" />
+		</h:selectOneMenu>
+		<h:commandButton value="Consulter produits par catégorie"
 				action="#{produitMB.consulterToutByCategorie}" />
 		</h:panelGrid>
-	</h:form>
+</h:form>
 	<br />
 <h:form>
 <h:commandButton value="Consulter produits" action="#{produitMB.consulterTout}" update="allProduits"/>
