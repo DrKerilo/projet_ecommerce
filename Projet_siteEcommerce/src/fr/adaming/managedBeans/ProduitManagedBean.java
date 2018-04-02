@@ -12,7 +12,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import fr.adaming.model.Categorie;
-import fr.adaming.model.Client;
 import fr.adaming.model.Produit;
 import fr.adaming.service.IProduitService;
 

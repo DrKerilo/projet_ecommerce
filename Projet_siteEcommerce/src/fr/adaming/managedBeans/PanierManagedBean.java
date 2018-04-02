@@ -10,6 +10,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.event.RowEditEvent;
+
 import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
@@ -37,14 +39,14 @@ public class PanierManagedBean implements Serializable{
 	// constructeur vide
 	public PanierManagedBean() {
 		ligneCommande = new LigneCommande();
-		produit = new Produit();
-		commande = new Commande();
+		produit = new Produit();		
 	}
 	
 	@PostConstruct
 	public void init() {
 		// pour que la méthode s'exécute après l'instanciation du ManagedBean
-		this.session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		this.session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+		commande = new Commande();
 	}
 
 	// guetters et seters
@@ -93,7 +95,7 @@ public class PanierManagedBean implements Serializable{
 	public String ajoutProduitPanier(){
 		this.ligneCommande = panierService.ajoutLigneCommande(this.ligneCommande, this.produit, this.commande);
 		listeLignesCommandes = commandeService.getAllLignesCommandes(commande);
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("LignesCommandesSession", listeLignesCommandes);
+		session.setAttribute("LignesCommandesSession", listeLignesCommandes);
 		return "panier";
 	}
 	
@@ -105,6 +107,11 @@ public class PanierManagedBean implements Serializable{
 		return "panier";
 	}
 	
+	public void onRowEdit(RowEditEvent event){
+		//panierService.updateLigneCommande((LigneCommande) event.getObject(), commande);
+		List<LigneCommande> listeLignesCommandes = commandeService.getAllLignesCommandes(commande);
+		session.setAttribute("LignesCommandesSession", listeLignesCommandes);
+	}
 	
 
 }
