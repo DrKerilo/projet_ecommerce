@@ -7,18 +7,115 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>Espace administrateur</title>
+	<title>Espace administrateur</title>
 </h:head>
 <h:body>
 
 	<!-- Inclure le templace dans la page avec possibilité de modification -->
 	<ui:composition template="/resources/templates/layoutadmin.xhtml">
 		<!-- Modifier la partie "body.html" -->
-		<ui:define name="bodyFront">
-			<h1 style="font-family:Century Gothic;color:#333333;text-align:center">Bienvenue chez L'Origa, votre magasin d'ameublement et de décoration d'intérieur</h1>
-			<div style="text-align:center;margin-top:50px"><h:graphicImage library="images" name="decoration-salon-japonais.jpeg"/></div>
+		<ui:define name="bodyAdmin">
+			<p:layout style="width:100%;height:100%">
+
+				<!-- Menu sur la partie gauche de la page -->
+
+				<p:layoutUnit position="west" size="300">
+					<h:form>
+						<p:outputLabel for="categ" value="Afficher les produits de:" />
+						<p:selectOneMenu id="categ"
+							value="#{sessionScope.listeCategories}" style="width:125px">
+							<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />
+							<f:selectItems value="#{sessionScope.listeCategories}" var="cat"
+								itemLabel="#{cat.nomCategorie}" itemValue="#{cat.idCategorie}" />
+						</p:selectOneMenu>
+					</h:form>
+				</p:layoutUnit>
+
+				<!-- Affichage des catégories -->
+				<p:layoutUnit position="center">
+					<h:form>
+
+					</h:form>
+					<h:form id="form">
+						<p:growl id="msgs" showDetail="true" />
+
+						<p:dataTable id="cat1" var="cat"
+							value="#{sessionScope.listeCategories}" editable="true"
+							style="margin-bottom:20px;width:100%" rows="10" paginator="true"
+							paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
+							<f:facet name="header">
+           						Catégories
+       						</f:facet>
+
+							<p:ajax event="rowEdit" listener="#{categorieMB.onRowEdit}"
+								update=":form:msgs" />
+							<p:ajax event="rowEditCancel"
+								listener="#{categorieMB.onRowCancel}" update=":form:msgs" />
+
+							<p:column headerText="#">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{cat.idCategorie}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText id="modelInput" value="#{cat.idCategorie}"
+											style="width:100%" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Nom">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{cat.nomCategorie}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{cat.nomCategorie}" style="width:100%"
+											label="Nom" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<p:column headerText="Description">
+								<p:cellEditor>
+									<f:facet name="output">
+										<h:outputText value="#{cat.description}" />
+									</f:facet>
+									<f:facet name="input">
+										<p:inputText value="#{cat.description}" style="width:100%"
+											label="Description" />
+									</f:facet>
+								</p:cellEditor>
+							</p:column>
+
+							<!-- A rajouter plus tard : photos ! -->
+
+							<p:column style="width:32px">
+								<p:rowEditor />
+							</p:column>
+							<p:column style="width:32px">
+								<p:commandButton icon="ui-icon-closethick"
+									action="#{categorieMB.supprimer}" update="@all">
+									<f:setPropertyActionListener value="#{cat.idCategorie}"
+										target="#{categorieMB.categorie.idCategorie}" />
+									<p:confirm header="Confirmation" message="Êtes-vous sûr ?"
+										icon="ui-icon-alert" />
+								</p:commandButton>
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="fade">
+									<p:commandButton value="Oui" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Non" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</p:layoutUnit>
+			</p:layout>
+
 		</ui:define>
 	</ui:composition>
-	
+
 </h:body>
 </html>
