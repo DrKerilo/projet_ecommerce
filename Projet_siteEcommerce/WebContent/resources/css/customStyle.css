@@ -1,6 +1,9 @@
 @CHARSET "UTF-8";
 
-.welcome{
-	font-family:"Century Gothic";
-	color:red;
+body{
+	font-family:Century Gothic, Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+}
+
+.lay-admin{
+	background-color:lightgray;
 }

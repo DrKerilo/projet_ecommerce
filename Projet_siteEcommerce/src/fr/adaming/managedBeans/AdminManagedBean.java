@@ -69,7 +69,7 @@ public class AdminManagedBean {
 	public String seDeconnecter(){
 		// fermer la session Http courante
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "testMethodes";
+		return "accueil";
 	}
 	
 }

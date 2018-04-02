@@ -7,26 +7,26 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>Layout Front Office</title>
+<title>Layout Back Office</title>
 <h:outputStylesheet library="css" name="customStyle.css"/>
 </h:head>
-<h:body>
+<h:body styleClass="lay-admin">
 <!-- Mise en place du header -->
-<ui:insert name="headerFront">
-	<ui:include src="/resources/templates/headerfront.xhtml"></ui:include>
+<ui:insert name="headerAdmin">
+	<ui:include src="/resources/templates/headeradmin.xhtml"></ui:include>
 </ui:insert>
 
 <!-- Mise en place du body et de son style -->
 <div style="height:500px;margin-top:20px;padding:20pxborder-radius:4px;padding:15px;border:1px solid #F77A10">
-<ui:insert name="bodyFront">
-	<ui:include src="/resources/templates/bodyfront.xhtml"></ui:include>
+<ui:insert name="bodyAdmin">
+	<ui:include src="/resources/templates/bodyadmin.xhtml"></ui:include>
 </ui:insert>
 </div>
 
 <!-- Mise en place du footer et de son style -->
 <div style="text-align:right;margin-top:20px;border-radius:4px;padding:15px;background-color:#f6a828;border:1px solid #F77A10">
-<ui:insert name="footerFront">
-	<ui:include src="/resources/templates/footerfront.xhtml"></ui:include>
+<ui:insert name="footerAdmin">
+	<ui:include src="/resources/templates/footeradmin.xhtml"></ui:include>
 </ui:insert>
 </div>
 </h:body>

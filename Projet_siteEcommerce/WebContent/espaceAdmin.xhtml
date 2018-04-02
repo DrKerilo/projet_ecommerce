@@ -7,23 +7,18 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<TITLE>login facelet</TITLE>
+<title>Espace administrateur</title>
 </h:head>
-
 <h:body>
-<header style="font-size: 54px; text-align: center">Espace administrateur</header>
-<h:commandButton value = "Se déconnecter" action="#{adminMB.seDeconnecter}"/>
-	<h:form>
-		<p:breadCrumb>
-			<p:menuitem value="Liste catégories" url="testVal.xhtml" />
-			<p:menuitem value="Liste produits" url="testMethodes.xhtml" />
-			<p:menuitem value="Liste produits par catégorie" url="formulaireTest.xhtml" />
-			<p:menuitem value="Ajouter" url="formulaireTest.xhtml" />
-			<p:menuitem value="Modifier" url="formulaireTest.xhtml" />
-			<p:menuitem value="Supprimer" url="formulaireTest.xhtml" />
-			<p:menuitem value="Consulter un produit" url="formulaireTest.xhtml" />			
-		</p:breadCrumb>
-		<h:commandButton value = "Se déconnecter" action="#{adminMB.seDeconnecter}"/>
-	</h:form>
+
+	<!-- Inclure le templace dans la page avec possibilité de modification -->
+	<ui:composition template="/resources/templates/layoutadmin.xhtml">
+		<!-- Modifier la partie "body.html" -->
+		<ui:define name="bodyFront">
+			<h1 style="font-family:Century Gothic;color:#333333;text-align:center">Bienvenue chez L'Origa, votre magasin d'ameublement et de décoration d'intérieur</h1>
+			<div style="text-align:center;margin-top:50px"><h:graphicImage library="images" name="decoration-salon-japonais.jpeg"/></div>
+		</ui:define>
+	</ui:composition>
+	
 </h:body>
 </html>
