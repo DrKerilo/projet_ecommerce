@@ -1,5 +1,6 @@
 package fr.adaming.managedBeans;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -18,7 +19,7 @@ import fr.adaming.service.ICategorieService;
 
 @ManagedBean(name = "categorieMB")
 @RequestScoped
-public class CategorieManagedBean {
+public class CategorieManagedBean implements Serializable {
 
 	// Attributs
 	private Categorie categorie;
@@ -87,11 +88,11 @@ public class CategorieManagedBean {
 			// Récupérer la liste des catégories mise à jour
 			listeCategories = categorieService.getAll();
 			this.session.setAttribute("listeCategories", listeCategories);
-			return "espaceAdmin";
+			return "testVal";
 		} else {
 			// Si erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur dans l'ajout."));
-			return "#";
+			return "testVal";
 		}
 	}
 

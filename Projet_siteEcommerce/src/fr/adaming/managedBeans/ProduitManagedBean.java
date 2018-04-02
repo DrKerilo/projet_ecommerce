@@ -130,10 +130,10 @@ public class ProduitManagedBean implements Serializable{
 	public String consulterToutByCategorie(){
 		listeProduits = produitService.getAll(this.categorie);
 		if(listeProduits != null){
-			return "testMethodes.xhtml";
+			return "produitsadmin.xhtml";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Une erreur est survenue, produit introuvable"));
-			return "testMethodes.xhtml";
+			return "#";
 		}
 	}
 

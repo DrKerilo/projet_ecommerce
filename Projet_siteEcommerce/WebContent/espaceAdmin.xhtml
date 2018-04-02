@@ -27,6 +27,9 @@
 							<f:selectItems value="#{sessionScope.listeCategories}" var="cat"
 								itemLabel="#{cat.nomCategorie}" itemValue="#{cat.idCategorie}" />
 						</p:selectOneMenu>
+						
+						<!-- Ce bouton déconne: à revoir ! -->
+						<p:commandButton value="Chercher" action="#{produitMB.consulterToutByCategorie}"/>
 					</h:form>
 				</p:layoutUnit>
 
