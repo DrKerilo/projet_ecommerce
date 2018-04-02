@@ -37,7 +37,7 @@ public class ProduitDaoImpl implements IProduitDao {
 	@Override
 	public int update(Produit p) {
 		// requête JPQL pour modifier un produit
-		String req = "UPDATE Produit p SET p.designation=:pDesignation, p.description=:pDescription, p.prix=:pPrix, p.quantite=:pQuantite, p.selectionne=:pSelectionne, p.photo=:pPhoto, p.categorie=:pCategorie WHERE p.idProduit=:pIdProduit";
+		String req = "UPDATE Produit p SET p.designation=:pDesignation, p.description=:pDescription, p.prix=:pPrix, p.quantite=:pQuantite, p.selectionne=:pSelectionne, p.photo=:pPhoto, p.categorie.idCategorie=:pIdCategorie WHERE p.idProduit=:pIdProduit";
 		
 		Query query = em.createQuery(req);
 
@@ -47,7 +47,7 @@ public class ProduitDaoImpl implements IProduitDao {
 		query.setParameter("pQuantite", p.getQuantite());
 		query.setParameter("pSelectionne", p.isSelectionne());
 		query.setParameter("pPhoto", p.getPhoto());
-		query.setParameter("pCategorie", p.getCategorie().getIdCategorie());
+		query.setParameter("pIdCategorie", p.getCategorie().getIdCategorie());
 		query.setParameter("pIdProduit", p.getIdProduit());
 
 		return query.executeUpdate();

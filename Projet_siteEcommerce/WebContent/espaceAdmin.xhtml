@@ -7,9 +7,14 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+<<<<<<< HEAD
 	<title>Espace administrateur</title>
+=======
+	<TITLE>login facelet</TITLE>
+>>>>>>> branch 'master' of https://github.com/Keriga/projet_ecommerce.git
 </h:head>
 <h:body>
+<<<<<<< HEAD
 
 	<!-- Inclure le templace dans la page avec possibilité de modification -->
 	<ui:composition template="/resources/templates/layoutadmin.xhtml">
@@ -116,6 +121,27 @@
 
 		</ui:define>
 	</ui:composition>
+=======
+	<header style="font-size: 54px; text-align: center">Espace
+		administrateur</header>
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem value="Accueil espace administrateur" url="espaceAdmin.xhtml" />
+			<p:menuitem value="Consulter catégories" url="testMethodes.xhtml" />
+			<p:menuitem value="Ajouter catégorie" url="testVal.xhtml" />
+			<p:menuitem value="Modifier catégorie" url="testVal.xhtml" />
+			<p:menuitem value="Supprimer catégorie" url="testVal.xhtml" />
+			<p:menuitem value="Consulter produits" url="testMethodes.xhtml" />
+			<p:menuitem value="Ajouter produit" url="formulaireTest.xhtml" />
+			<p:menuitem value="Modifier produit" url="formulaireTest.xhtml" />
+			<p:menuitem value="Supprimer produit" url="formulaireTest.xhtml" />
+		</p:breadCrumb>
+	</h:form>
+	<h:form>
+		<h:commandButton value="Se déconnecter"
+			action="#{adminMB.seDeconnecter}" />
+	</h:form>
+>>>>>>> branch 'master' of https://github.com/Keriga/projet_ecommerce.git
 
 </h:body>
 </html>

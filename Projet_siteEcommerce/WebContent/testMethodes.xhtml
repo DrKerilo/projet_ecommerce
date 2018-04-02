@@ -13,18 +13,41 @@
 <h:body>
 	<h:form>
 		<p:breadCrumb>
-			<p:menuitem value="Liste produits" url="testMethodes.xhtml" />
-			<p:menuitem value="Ajouter" url="formulaireTest.xhtml" />
-			<p:menuitem value="Modifier" url="formulaireTest.xhtml" />
-			<p:menuitem value="Supprimer" url="formulaireTest.xhtml" />
-			<p:menuitem value="Consulter" url="formulaireTest.xhtml" />
-			<p:menuitem value="Liste produits par catégorie" url="formulaireTest.xhtml" />
+			<p:menuitem value="Consulter produits et catégories" url="testMethodes.xhtml" />
 			<p:menuitem value="Espace administrateur" url="adminLogin.xhtml" />
 		</p:breadCrumb>
 	</h:form>
 
+	<h1>Liste catégories</h1>
+	<hr />
+	<h:form>
+		<h:commandButton value="Consulter catégories"
+			action="#{categorieMB.consulterTout}" update="getall" />
+	</h:form>
+	<p:dataTable var="cat" value="#{categorieMB.listeCategories}" id="getall">
+		<p:column headerText="Id">
+			<h:outputText value="#{cat.idCategorie}" />
+		</p:column>
 
+		<p:column headerText="Nom">
+			<h:outputText value="#{cat.nomCategorie}" />
+		</p:column>
 
+		<p:column headerText="Description">
+			<h:outputText value="#{cat.description}" />
+		</p:column>
+	</p:dataTable>
+<br/>
+<hr/>
+<h1>Consulter produit par catégorie</h1>
+<h:form>
+		<h:panelGrid columns="2">
+		Catégorie : <h:inputText value="#{produitMB.categorie.idCategorie}" />
+			<h:commandButton value="Consulter produits par catégorie"
+				action="#{produitMB.consulterToutByCategorie}" />
+		</h:panelGrid>
+	</h:form>
+	<br />
 <h:form>
 <h:commandButton value="Consulter produits" action="#{produitMB.consulterTout}" update="allProduits"/>
 	<p:dataTable var="produit" value="#{produitMB.listeProduits}" id="allProduits">

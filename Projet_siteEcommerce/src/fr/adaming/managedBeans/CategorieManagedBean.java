@@ -78,7 +78,7 @@ public class CategorieManagedBean {
 	// Consulter toutes les catégories
 	public String consulterTout() {
 		this.listeCategories = categorieService.getAll();
-		return "testVal"; // A revoir !
+		return "testMethodes.xhtml"; // A revoir !
 	}
 
 	public String ajouter() {
