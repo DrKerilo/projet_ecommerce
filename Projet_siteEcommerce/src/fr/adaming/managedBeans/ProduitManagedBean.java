@@ -73,7 +73,7 @@ public class ProduitManagedBean implements Serializable{
 	public String consulterTout(){
 		listeProduits = produitService.getAll();
 		if(listeProduits != null){
-			return "testMethodes.xhtml";
+			return "recherche.xhtml";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Une erreur est survenue, liste introuvable"));
 			return "testMethodes.xhtml";
@@ -130,7 +130,7 @@ public class ProduitManagedBean implements Serializable{
 	public String consulterToutByCategorie(){
 		listeProduits = produitService.getAll(this.categorie);
 		if(listeProduits != null){
-			return "produitsadmin.xhtml";
+			return "recherche.xhtml";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Une erreur est survenue, produit introuvable"));
 			return "#";

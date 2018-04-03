@@ -96,7 +96,7 @@ public class PanierManagedBean implements Serializable{
 		this.ligneCommande = panierService.ajoutLigneCommande(this.ligneCommande, this.produit, this.commande);
 		listeLignesCommandes = commandeService.getAllLignesCommandes(commande);
 		session.setAttribute("LignesCommandesSession", listeLignesCommandes);
-		return "panier";
+		return "recherche";
 	}
 	
 	public String validerPanier(){
