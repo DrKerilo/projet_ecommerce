@@ -24,9 +24,10 @@
 						<p:selectOneMenu id="categ"
 							value="#{sessionScope.listeCategories}" style="width:125px">
 							<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />
-							<f:selectItems value="#{sessionScope.listeCategories}" var="cat"
-								itemLabel="#{cat.nomCategorie}" itemValue="#{cat.idCategorie}" />
+							<f:selectItems value="#{sessionScope.listeCategories}" var="toto"
+								itemLabel="#{toto.nomCategorie}" itemValue="#{toto.idCategorie}" />
 						</p:selectOneMenu>
+						<h:outputText value="#{toto.idCategorie}"/>
 						
 						<!-- Ce bouton déconne: à revoir ! -->
 						<p:commandButton value="Chercher" action="#{produitMB.consulterToutByCategorie}"/>
