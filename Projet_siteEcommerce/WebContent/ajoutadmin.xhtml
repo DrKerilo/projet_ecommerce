@@ -43,7 +43,7 @@
 							<h:outputLabel for="nameCat" value="Quantité en stock:" />
 							<p:inputText value="#{produitMB.produit.quantite}" />
 							<h:outputLabel for="nameCat" value="Catégorie du produit:" />
-							<p:selectOneMenu value="#{sessionScope.listeCategories}">
+							<p:selectOneMenu value="#{produitMB.categorie.idCategorie}">
 								<f:selectItems value="#{sessionScope.listeCategories}" var="cat"
 									itemLabel="#{cat.nomCategorie}"
 									itemValue="#{cat.idCategorie}" />

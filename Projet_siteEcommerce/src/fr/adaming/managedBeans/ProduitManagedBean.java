@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
+import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name="produitMB")
@@ -22,6 +23,9 @@ public class ProduitManagedBean implements Serializable{
 	// transformer l'association uml en java
 	@EJB
 	IProduitService produitService;
+	
+	@EJB
+	ICategorieService catService;
 	
 	// déclaration des attributs du ManagedBean
 	private Produit produit;
@@ -80,7 +84,9 @@ public class ProduitManagedBean implements Serializable{
 		}
 	}
 	public String ajouter(){
-		Produit pAjoute = produitService.add(this.produit, this.produit.getCategorie());
+		
+		this.categorie=catService.get(categorie);
+		Produit pAjoute = produitService.add(this.produit, categorie);
 		if(pAjoute != null){
 			this.listeProduits = produitService.getAll();
 			return "espaceAdmin.xhtml";
