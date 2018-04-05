@@ -30,7 +30,7 @@ Ajouter
 		catégorie : <h:selectOneMenu
 				value="#{categorieMB.categorie.idCategorie}">
 				<f:selectItems value="#{sessionScope.listeCategories}" var="cat"
-					itemLabel="#{cat.nomCategorie}" itemValue="#{produitMB.categorie.idCategorie}" />
+					itemLabel="#{cat.nomCategorie}" itemValue="#{cat}" />
 			</h:selectOneMenu>
 			<h:commandButton value="Ajouter" action="#{produitMB.ajouter}" />
 		</h:panelGrid>

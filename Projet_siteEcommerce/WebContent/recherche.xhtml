@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<TITLE>Recherche produit</TITLE>
+</h:head>
+
+<h:body>
+
+<h1>Consulter produit par catégorie</h1>
+<h:form>
+		<h:panelGrid columns="2">
+		Catégorie : <h:inputText value="#{produitMB.categorie.idCategorie}" />
+			<h:commandButton value="Consulter produits par catégorie"
+				action="#{produitMB.consulterToutByCategorie}" />
+		</h:panelGrid>
+</h:form>
+	<br />
+	
+<h:form>
+	<h:commandButton value="Consulter produits" action="#{produitMB.consulterTout}" update="allProduits"/>
+		<p:dataTable var="produit" value="#{produitMB.listeProduits}" id="allProduits">
+		    <p:column headerText="Id">
+		        <h:outputText value="#{produit.idProduit}" />
+		    </p:column>
+		 
+		    <p:column headerText="designation">
+		        <h:outputText value="#{produit.designation}" />
+		    </p:column>
+		 
+		    <p:column headerText="description">
+		        <h:outputText value="#{produit.description}" />
+		    </p:column>
+	
+		    <p:column headerText="quantite">
+		        <h:outputText value="#{produit.quantite}" />
+		    </p:column>
+		    
+		    <p:column headerText="catégorie">
+		        <h:outputText value="#{produit.categorie.idCategorie}" />
+		    </p:column>
+		</p:dataTable>	
+</h:form>
+<h:form>             
+    <h3 style="margin-top: 0">Selection produit</h3>
+    designation : <h:inputText value="#{panierMB.produit.designation}" />
+    prix : <h:inputText value="#{panierMB.produit.prix}" />   
+	    <h:panelGrid columns="2" cellpadding="5" styleClass="ui-grid">
+	        <h:outputLabel for="minMax" value="Quantité : " />
+	        <p:spinner id="minMax" value="#{panierMB.ligneCommande.quantite}" min="0" max="20" />
+	    </h:panelGrid>
+ 
+    <p:commandButton value="Submit" action="#{panierMB.ajoutProduitPanier}" />
+</h:form>
+
+<h:form>
+		<p:dataTable var="lc" value="#{sessionScope.listeLignesCommandes}" >
+		    <p:column headerText="Id">
+		        <h:outputText value="#{lc.idLigneCommande}" />
+		    </p:column>
+		 
+		    <p:column headerText="Produit">
+		        <h:outputText value="#{lc.produit.designation}" />
+		    </p:column>
+		 
+		    <p:column headerText="Quantité">
+		        <h:outputText value="#{lc.quantite}" />
+		    </p:column>
+	
+		    <p:column headerText="Prix">
+		        <h:outputText value="#{lc.prix}" />
+		    </p:column>
+		</p:dataTable>	
+</h:form>
+
+</h:body>
+</html>
