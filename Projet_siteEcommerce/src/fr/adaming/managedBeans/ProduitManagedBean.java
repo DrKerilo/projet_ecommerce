@@ -11,41 +11,42 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.primefaces.event.RowEditEvent;
+
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
-@ManagedBean(name="produitMB")
+@ManagedBean(name = "produitMB")
 @RequestScoped
-public class ProduitManagedBean implements Serializable{
-	
+public class ProduitManagedBean implements Serializable {
+
 	// transformer l'association uml en java
 	@EJB
 	IProduitService produitService;
-	
+
 	@EJB
 	ICategorieService catService;
-	
+
 	// déclaration des attributs du ManagedBean
 	private Produit produit;
 	private List<Produit> listeProduits;
 	private Categorie categorie;
-	//HttpSession session;
+	HttpSession session;
 
 	// constructeur vide
 	public ProduitManagedBean() {
 		// instancier un produit
-		this.produit  = new Produit();
+		this.produit = new Produit();
 		this.categorie = new Categorie();
 	}
-	
+
 	@PostConstruct
 	public void init() {
-		// pour que la méthode s'exécute après l'instanciation du ProduitManagedBean
-		//this.session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		this.session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	}
-	
+
 	// guetters et setters
 	public Produit getProduit() {
 		return produit;
@@ -61,8 +62,8 @@ public class ProduitManagedBean implements Serializable{
 
 	public void setListeProduits(List<Produit> listeProduits) {
 		this.listeProduits = listeProduits;
-	}	
-		
+	}
+
 	public Categorie getCategorie() {
 		return categorie;
 	}
@@ -71,80 +72,96 @@ public class ProduitManagedBean implements Serializable{
 		this.categorie = categorie;
 	}
 
-	
 	// méthodes du managedBean
 
-	public String consulterTout(){
+	public String consulterTout() {
 		listeProduits = produitService.getAll();
-		if(listeProduits != null){
+		if (listeProduits != null) {
 			return "recherche.xhtml";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Une erreur est survenue, liste introuvable"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Une erreur est survenue, liste introuvable."));
 			return "testMethodes.xhtml";
 		}
 	}
-	public String ajouter(){
-		
-		this.categorie=catService.get(categorie);
+
+	public String ajouter() {
+
+		this.categorie = catService.get(categorie);
 		Produit pAjoute = produitService.add(this.produit, categorie);
-		if(pAjoute != null){
+		if (pAjoute != null) {
 			this.listeProduits = produitService.getAll();
 			return "espaceAdmin.xhtml";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Une erreur est survenue, produit non ajouté"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Une erreur est survenue, produit non ajouté."));
 			return "#";
 		}
 	}
-	
-	public String supprimer(){
+
+	public String supprimer() {
 		int verif = produitService.delete(this.produit);
-		if(verif != 0){
+		if (verif != 0) {
 			this.listeProduits = produitService.getAll();
-			return "testMethodes.xhtml";
+			return "produitsadmin";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Une erreur est survenue, produit non supprimé"));
-			return "testMethodes.xhtml";
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Une erreur est survenue, produit non supprimé."));
+			return "produitsadmin";
 		}
 	}
-	
-	public String modifier(){
+
+	// Non utilisée : la modification se fait via RowEdit
+	public String modifier() {
 		int verif = produitService.update(this.produit, this.categorie);
-		if(verif !=0){
+		if (verif != 0) {
 			this.listeProduits = produitService.getAll();
 			return "testMethodes.xhtml";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Une erreur est survenue, produit non modifié"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Une erreur est survenue, produit non modifié."));
 			return "testMethodes.xhtml";
 		}
 	}
-	
-	public void getByIdEvent(){
-		
-		this.produit=produitService.get(this.produit);
+
+	public void onRowEdit(RowEditEvent event) {
+		produitService.update((Produit) event.getObject(),this.categorie);
+		listeProduits = produitService.getAll();
+		session.setAttribute("listeProduits", listeProduits);
+		FacesMessage msg = new FacesMessage("Produit modifié", ((Produit) event.getObject()).getDesignation());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
-	public String consulter(){
+
+	public void onRowCancel(RowEditEvent event) {
+		FacesMessage msg = new FacesMessage("Modification annulée", ((Produit) event.getObject()).getDesignation());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+
+	public void getByIdEvent() {
+
+		this.produit = produitService.get(this.produit);
+	}
+
+	public String consulter() {
 		produit = produitService.get(this.produit);
-		if(produit != null){
+		if (produit != null) {
 			return "formulaireTest.xhtml";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Une erreur est survenue, produit introuvable"));
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Une erreur est survenue, produit(s) introuvable(s)."));
 			return "testMethodes.xhtml";
 		}
 	}
-	
-	public String consulterToutByCategorie(){
+
+	public String consulterToutByCategorie() {
 		listeProduits = produitService.getAll(this.categorie);
-		if(listeProduits != null){
-			return "recherche.xhtml";
+		if (listeProduits != null) {
+			return "produitsadmin";
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Une erreur est survenue, produit introuvable"));
-			return "#";
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Une erreur est survenue, produit(s) introuvable(s)."));
+			return "espaceAdmin";
 		}
 	}
-
-	
-
-	
 
 }

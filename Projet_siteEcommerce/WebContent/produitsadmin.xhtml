@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<title>Facelet</title>
+	<title>Facelet</title>
 </h:head>
 <h:body>
 	<!-- Inclure le templace dans la page avec possibilité de modification -->
@@ -17,16 +17,19 @@
 			<p:layout style="width:100%;height:100%">
 
 				<!-- Menu sur la partie gauche de la page -->
-
 				<p:layoutUnit position="west" size="300">
 					<h:form>
 						<p:outputLabel for="categ" value="Afficher les produits de:" />
 						<p:selectOneMenu id="categ"
-							value="#{sessionScope.listeCategories}" style="width:125px">
+							value="#{produitMB.categorie.idCategorie}" style="width:125px">
 							<f:selectItem itemLabel="Choisir la catégorie" itemValue="" />
-							<f:selectItems value="#{sessionScope.listeCategories}" var="cat"
-								itemLabel="#{cat.nomCategorie}" itemValue="#{cat.idCategorie}" />
+							<f:selectItems value="#{sessionScope.listeCategories}" var="toto"
+								itemLabel="#{toto.nomCategorie}" itemValue="#{toto.idCategorie}" />
 						</p:selectOneMenu>
+						<h:outputText value="#{toto.idCategorie}" />
+
+						<p:commandButton value="Chercher"
+							action="#{produitMB.consulterToutByCategorie}" />
 					</h:form>
 				</p:layoutUnit>
 
@@ -43,10 +46,10 @@
            						Produits
        						</f:facet>
 
-							<p:ajax event="rowEdit" listener="#{categorieMB.onRowEdit}"
+							<p:ajax event="rowEdit" listener="#{produitMB.onRowEdit}"
 								update=":form:msgs" />
 							<p:ajax event="rowEditCancel"
-								listener="#{categorieMB.onRowCancel}" update=":form:msgs" />
+								listener="#{produitMB.onRowCancel}" update=":form:msgs" />
 
 							<p:column headerText="#">
 								<p:cellEditor>
@@ -85,15 +88,25 @@
 							</p:column>
 
 							<!-- A rajouter plus tard : photos ! -->
-
-							<p:column style="width:32px">
+							<!-- Fonction "Sélection" -->
+							<p:column styleClass="operations-admin">
+								<p:commandButton update=":form:prodDetail"
+									oncomplete="PF('prodDialog').show()" icon="ui-icon-search"
+									title="View">
+									<f:setPropertyActionListener value="#{prod}"
+										target="#{produitMB.produit}" />
+								</p:commandButton>
+							</p:column>
+							<!-- Fonction "Edition" -->
+							<p:column styleClass="operations-admin">
 								<p:rowEditor />
 							</p:column>
-							<p:column style="width:32px">
+							<!-- Fonction "Suppression" + confirm dialog -->
+							<p:column styleClass="operations-admin">
 								<p:commandButton icon="ui-icon-closethick"
-									action="#{categorieMB.supprimer}" update="@all">
-									<f:setPropertyActionListener value="#{cat.idCategorie}"
-										target="#{categorieMB.categorie.idCategorie}" />
+									action="#{produitMB.supprimer}" update="@all">
+									<f:setPropertyActionListener value="#{prod.idProduit}"
+										target="#{produitMB.produit.idProduit}" />
 									<p:confirm header="Confirmation" message="Êtes-vous sûr ?"
 										icon="ui-icon-alert" />
 								</p:commandButton>
@@ -106,6 +119,32 @@
 								</p:confirmDialog>
 							</p:column>
 						</p:dataTable>
+
+						<!-- Boîte de dialogue pour la fonction "Sélection" -->
+						<p:dialog header="Produit" widgetVar="prodDialog" global="true"
+							showEffect="fade" hideEffect="fade" resizable="false">
+							<p:outputPanel id="prodDetail" style="text-align:center;">
+								<p:panelGrid columns="2"
+									rendered="#{not empty produitMB.produit}"
+									columnClasses="label,value">
+									<f:facet name="header">
+										<p:graphicImage library="images" name="bckgnd-admin.png" />
+									</f:facet>
+
+									<h:outputText value="#:" />
+									<h:outputText value="#{produitMB.produit.idProduit}" />
+
+									<h:outputText value="Nom:" />
+									<h:outputText value="#{produitMB.produit.designation}" />
+
+									<h:outputText value="Description:" />
+									<h:outputText value="#{produitMB.produit.description}" />
+									
+									<h:outputText value="Prix:" />
+									<h:outputText value="#{produitMB.produit.prix}" />
+								</p:panelGrid>
+							</p:outputPanel>
+						</p:dialog>
 					</h:form>
 				</p:layoutUnit>
 			</p:layout>
