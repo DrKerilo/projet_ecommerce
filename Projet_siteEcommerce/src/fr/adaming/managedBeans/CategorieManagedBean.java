@@ -76,10 +76,11 @@ public class CategorieManagedBean implements Serializable {
 	}
 
 	// Méthodes métiers
-	// Consulter toutes les catégories
+	
+	// Non utilisée
 	public String consulterTout() {
 		this.listeCategories = categorieService.getAll();
-		return "testMethodes.xhtml"; // A revoir !
+		return "testMethodes"; // A revoir !
 	}
 
 	public String ajouter() {
@@ -96,6 +97,7 @@ public class CategorieManagedBean implements Serializable {
 		}
 	}
 
+	// Non utilisée : la modification se fait via le RowEdit
 	public String modifier() {
 		int verif = categorieService.update(categorie);
 		if (verif != 0) {
@@ -122,18 +124,16 @@ public class CategorieManagedBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
-	public String supprimer() {
+	public void supprimer() {
 		int verif = categorieService.delete(categorie);
 		if (verif != 0) {
 			// Récupérer la liste des catégories mise à jour
 			listeCategories = categorieService.getAll();
 			// L'ajouter à la session
 			session.setAttribute("listeCategories", listeCategories);
-			return "#";
 		} else {
 			// Si erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La catégorie indiquée n'existe pas."));
-			return "#";
 		}
 	}
 
