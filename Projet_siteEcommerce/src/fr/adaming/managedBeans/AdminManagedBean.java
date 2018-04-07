@@ -50,7 +50,8 @@ public class AdminManagedBean {
 		this.listeCategories = listeCategories;
 	}
 	
-	// méthode du managedBean
+	// Méthode du managedBean
+	// Utilisation de règles de navigation car possibilité de connexion depuis plusieurs pages
 	public String seConnecter(){
 		try {
 			Admin aOut = adminService.isExist(this.admin);
@@ -63,7 +64,7 @@ public class AdminManagedBean {
 		} catch (Exception ex) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Admin introuvable"));
 		}
-		return "#";
+		return "accueil";
 	}
 	
 	public String seDeconnecter(){

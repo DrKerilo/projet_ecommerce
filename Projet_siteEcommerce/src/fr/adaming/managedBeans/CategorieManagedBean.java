@@ -88,11 +88,11 @@ public class CategorieManagedBean implements Serializable {
 			// Récupérer la liste des catégories mise à jour
 			listeCategories = categorieService.getAll();
 			this.session.setAttribute("listeCategories", listeCategories);
-			return "testVal";
+			return "espaceAdmin";
 		} else {
 			// Si erreur
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Erreur dans l'ajout."));
-			return "testVal";
+			return "ajoutadmin";
 		}
 	}
 
@@ -107,11 +107,6 @@ public class CategorieManagedBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("La catégorie indiquée n'existe pas."));
 			return "testVal";
 		}
-	}
-
-	public String editLink() {
-		this.categorie = categorieService.get(categorie);
-		return "#";
 	}
 
 	public void onRowEdit(RowEditEvent event) {

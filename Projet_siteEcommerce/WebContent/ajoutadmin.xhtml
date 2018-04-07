@@ -14,7 +14,7 @@
 	<ui:composition template="/resources/templates/layoutadmin.xhtml">
 		<!-- Modifier la partie "body.html" -->
 		<ui:define name="bodyAdmin">
-			<p:tabView style="height:100%;width:100%;margin:auto">
+			<p:tabView style="height:100%">
 				<p:tab title="Ajouter une catégorie">
 					<h:form>
 						<p:growl id="growl" summary="true" life="3000" />
@@ -48,7 +48,7 @@
 									itemLabel="#{cat.nomCategorie}"
 									itemValue="#{cat.idCategorie}" />
 							</p:selectOneMenu>
-							<h:commandButton value="Ajouter" action="#{produitMB.ajouter}" />
+							<p:commandButton value="Ajouter" action="#{produitMB.ajouter}" />
 						</h:panelGrid>
 					</h:form>
 				</p:tab>

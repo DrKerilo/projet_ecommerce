@@ -5,5 +5,19 @@ body{
 }
 
 .lay-admin{
-	background-color:lightgray;
+	background-color: #E3EBA0;
+	/*background-image: url("#{resource['images:bckgnd-admin.png']}");
+	background-repeat: repeat;
+	background-size: 2%;*/
+}
+
+.body-admin{
+	background-color:white;
+	height:500px;
+	margin-top:20px;
+	background-color:#E3EBA0;
+}
+
+.ui-layout-unit{
+	margin:10px;
 }
