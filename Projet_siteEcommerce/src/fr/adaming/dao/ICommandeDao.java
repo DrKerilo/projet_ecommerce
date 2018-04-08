@@ -1,14 +1,16 @@
 package fr.adaming.dao;
 
-import java.util.List;
-
 import javax.ejb.Local;
 
+import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
-import fr.adaming.model.LigneCommande;
 
 @Local
 public interface ICommandeDao {
-	public List<LigneCommande> getAllLignesCommandes(Commande commande);
+	public Commande getCommande(Commande c, Client cl);
+	
+	public int deleteCommande(Commande c, Client cl);
+	
+	public int updateCommande(Commande c, Client cl);
 
 }

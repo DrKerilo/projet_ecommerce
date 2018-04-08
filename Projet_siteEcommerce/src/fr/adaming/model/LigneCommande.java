@@ -39,8 +39,21 @@ public class LigneCommande {
 		this.quantite = quantite;
 		this.prix = prix;
 	}
-	
+		
+	public LigneCommande(Long idLigneCommande, int quantite, int prix) {
+		super();
+		this.idLigneCommande = idLigneCommande;
+		this.quantite = quantite;
+		this.prix = prix;
+	}
 	// getters et setters
+	
+	public Long getIdLigneCommande() {
+		return idLigneCommande;
+	}
+	public void setIdLigneCommande(Long idLigneCommande) {
+		this.idLigneCommande = idLigneCommande;
+	}
 	public int getQuantite() {
 		return quantite;
 	}
