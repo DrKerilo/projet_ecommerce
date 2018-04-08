@@ -1,23 +1,34 @@
 package fr.adaming.service;
 
-import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
 import fr.adaming.dao.ICommandeDao;
+import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
-import fr.adaming.model.LigneCommande;
 
 @Stateful
 public class CommandeServiceImpl implements ICommandeService{
 // association uml en java
 @EJB
 ICommandeDao commandeDao;
-	
-	@Override
-	public List<LigneCommande> getAllLignesCommandes(Commande commande) {
-		return commandeDao.getAllLignesCommandes(commande);
-	}
+		
+		@Override
+		public Commande getCommande(Commande c, Client cl) {
+			c.getClient();
+			return commandeDao.getCommande(c, cl);
+		}
+		
+		@Override
+		public int deleteCommande(Commande c, Client cl) {
+			c.getClient();
+			return commandeDao.deleteCommande(c, cl);
+		}
+		
+		@Override
+		public int updateCommande(Commande c, Client cl) {
+			c.getClient();
+			return commandeDao.updateCommande(c, cl);
+		}
 
 }

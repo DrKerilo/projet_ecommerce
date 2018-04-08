@@ -12,11 +12,12 @@ import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.RowEditEvent;
 
+import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICommandeService;
-import fr.adaming.service.IPanierService;
+import fr.adaming.service.ILigneCommandeService;
 
 @ManagedBean(name = "panierMB")
 @RequestScoped
@@ -24,7 +25,7 @@ public class PanierManagedBean implements Serializable{
 
 	// transformer l'association uml en java
 	@EJB
-	IPanierService panierService;
+	ILigneCommandeService ligneCommandeService;
 	
 	@EJB
 	ICommandeService commandeService;
@@ -35,6 +36,7 @@ public class PanierManagedBean implements Serializable{
 	private Commande commande;
 	HttpSession session;
 	private List<LigneCommande> listeLignesCommandes;
+	private Client client;
 
 	// constructeur vide
 	public PanierManagedBean() {
@@ -90,11 +92,20 @@ public class PanierManagedBean implements Serializable{
 		this.listeLignesCommandes = listeLignesCommandes;
 	}
 
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}	
+	
+
 	// méthodes du managedBean
 
 	public String ajoutProduitPanier(){
-		this.ligneCommande = panierService.ajoutLigneCommande(this.ligneCommande, this.produit, this.commande);
-		listeLignesCommandes = commandeService.getAllLignesCommandes(commande);
+		this.ligneCommande = ligneCommandeService.ajoutLigneCommande(this.ligneCommande, this.produit, this.commande);
+		listeLignesCommandes = ligneCommandeService.getAllLignesCommandes(commande);
 		session.setAttribute("LignesCommandesSession", listeLignesCommandes);
 		return "recherche";
 	}
@@ -104,12 +115,13 @@ public class PanierManagedBean implements Serializable{
 	}
 	
 	public String supprimerPanier(){
+		commandeService.deleteCommande(this.commande, this.client);
 		return "panier";
 	}
 	
 	public void onRowEdit(RowEditEvent event){
-		//panierService.updateLigneCommande((LigneCommande) event.getObject(), commande);
-		List<LigneCommande> listeLignesCommandes = commandeService.getAllLignesCommandes(commande);
+		//ligneCommandeService.updateLigneCommande((LigneCommande) event.getObject(), commande);
+		List<LigneCommande> listeLignesCommandes = ligneCommandeService.getAllLignesCommandes(commande);
 		session.setAttribute("LignesCommandesSession", listeLignesCommandes);
 	}
 	
