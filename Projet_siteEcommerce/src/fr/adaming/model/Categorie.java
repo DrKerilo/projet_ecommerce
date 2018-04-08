@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name="categories")
@@ -25,6 +26,8 @@ public class Categorie implements Serializable {
 	private String nomCategorie;
 	@Lob
 	private byte[] photo;
+	@Transient
+	private String image;
 	private String description;
 	
 	// Transformation de l'association UML en Java 
@@ -80,6 +83,12 @@ public class Categorie implements Serializable {
 	}
 	public void setListeProduits(List<Produit> listeProduits) {
 		this.listeProduits = listeProduits;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 

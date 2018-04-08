@@ -13,6 +13,8 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.UploadedFile;
+import org.primefaces.model.UploadedFileWrapper;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.service.ICategorieService;
@@ -26,6 +28,7 @@ public class CategorieManagedBean implements Serializable {
 	private List<Categorie> listeCategories;
 	private boolean rendered; // pour le rendered de la vue
 	private HttpSession session;
+	private UploadedFile uf;
 
 	// Transformation de l'association UML en Java
 	@EJB
@@ -35,6 +38,7 @@ public class CategorieManagedBean implements Serializable {
 	public CategorieManagedBean() {
 		this.categorie = new Categorie();
 		this.rendered = false;
+		this.uf=new UploadedFileWrapper();
 	}
 
 	@PostConstruct
@@ -46,44 +50,49 @@ public class CategorieManagedBean implements Serializable {
 	public Categorie getCategorie() {
 		return categorie;
 	}
-
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
-
 	public List<Categorie> getListeCategories() {
 		return listeCategories;
 	}
-
 	public void setListeCategories(List<Categorie> listeCategories) {
 		this.listeCategories = listeCategories;
 	}
-
 	public boolean isRendered() {
 		return rendered;
 	}
-
 	public void setRendered(boolean rendered) {
 		this.rendered = rendered;
 	}
-
 	public HttpSession getSession() {
 		return session;
 	}
-
 	public void setSession(HttpSession session) {
 		this.session = session;
 	}
-
-	// Méthodes métiers
+	public UploadedFile getUf() {
+		return uf;
+	}
+	public void setUf(UploadedFile uf) {
+		this.uf = uf;
+	}
 	
-	// Non utilisée
+
+	// Méthodes métiers	
+
 	public String consulterTout() {
 		this.listeCategories = categorieService.getAll();
-		return "testMethodes"; // A revoir !
+		this.session.setAttribute("listeCategories", listeCategories);	
+		System.out.println("Je suis là");
+		return "categories";
 	}
 
 	public String ajouter() {
+		// Ajouter la photo dans la catégorie
+		categorie.setPhoto(uf.getContents());
+		System.out.println(uf);
+		
 		Categorie catAjout = categorieService.add(categorie);
 		if (catAjout.getIdCategorie() != 0) {
 			// Récupérer la liste des catégories mise à jour
