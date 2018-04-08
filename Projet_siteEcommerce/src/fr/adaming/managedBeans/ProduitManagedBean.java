@@ -86,7 +86,6 @@ public class ProduitManagedBean implements Serializable {
 	}
 
 	public String ajouter() {
-
 		this.categorie = catService.get(categorie);
 		Produit pAjoute = produitService.add(this.produit, categorie);
 		if (pAjoute != null) {
@@ -154,6 +153,7 @@ public class ProduitManagedBean implements Serializable {
 	}
 
 	public String consulterToutByCategorie() {
+		this.categorie = catService.get(categorie);
 		listeProduits = produitService.getAll(this.categorie);
 		if (listeProduits != null) {
 			return "produitsadmin";

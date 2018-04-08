@@ -14,6 +14,27 @@
 
 <h:form>             
     <h3 style="margin-top: 0">Selection produit</h3>
+
+			<h:form>
+				<h:panelGrid columns="2">					
+					<h:outputLabel for="nameCat" value="Selectionner une catégorie :" />
+					<p:selectOneMenu value="#{panierMB.categorie.idCategorie}">
+						<f:selectItems value="#{sessionScope.listeCategories}" var="cat"
+							itemLabel="#{cat.nomCategorie}"
+							itemValue="#{cat.idCategorie}" />
+					</p:selectOneMenu>
+					<h:outputLabel for="nameCat" value="Selectionner un produit :" />
+					<p:selectOneMenu value="#{panierMB.produit.idProduit}">
+						<f:selectItems value="#{panierMB.listeProduits}" var="prod"
+							itemLabel="#{prod.designation}"
+							itemValue="#{prod.idProduit}" />
+					</p:selectOneMenu>
+					<h:outputLabel for="minMax" value="Quantité : " />
+       				<p:spinner id="minMax" value="#{panierMB.ligneCommande.quantite}" min="0" max="20" />
+					<p:commandButton value="Ajouter au panier" action="#{panierMB.ajoutProduitPanier()}" />
+				</h:panelGrid>
+			</h:form>
+    
     <p:orderList value="#{produitMB.listeProduits}" var="produit" controlsLocation="none" itemLabel="#{produit.designation}" itemValue="#{produit.idProduit}" />
     
     <h:panelGrid columns="2" cellpadding="5" styleClass="ui-grid">
@@ -21,13 +42,13 @@
         <p:spinner id="minMax" value="#{panierMB.ligneCommande.quantite}" min="0" max="20" />
     </h:panelGrid>
  
-    <p:commandButton value="Submit" update="panier" action="panierMB.ajoutProduitPanier()" />
+    <p:commandButton value="Submit" update="panier" action="#{panierMB.ajoutProduitPanier()}" />
 
 </h:form>
 
 <h:form id="form">
  
-   <p:dataTable id="cars1" var="lc" value="#{sessionScope.LignesCommandesSession}" editable="true" style="margin-bottom:20px">
+   <p:dataTable id="msgs" var="lc" value="#{sessionScope.LignesCommandesSession}" editable="true" style="margin-bottom:20px">
        <f:facet name="header">
            Panier
        </f:facet>
