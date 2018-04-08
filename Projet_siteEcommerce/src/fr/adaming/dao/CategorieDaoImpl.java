@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.commons.codec.binary.Base64;
+
 import fr.adaming.model.Categorie;
 
 @Stateless
@@ -22,8 +24,13 @@ public class CategorieDaoImpl implements ICategorieDao {
 		String req="SELECT cat FROM Categorie cat";
 		// Query
 		Query q=em.createQuery(req);
-		// Envoi de la requête et récupération de la liste des catégories
-		return q.getResultList();
+		// Récupération du résultat
+		List<Categorie> listeOut=q.getResultList();
+		// Chargement des images
+		for(Categorie cat: listeOut){
+			cat.setImage("data:image/png;base64,"+Base64.encodeBase64String(cat.getPhoto()));
+		}
+		return listeOut;
 	}
 
 	@Override
@@ -68,8 +75,12 @@ public class CategorieDaoImpl implements ICategorieDao {
 		Query q=em.createQuery(req);
 		// Passage des paramètres
 		q.setParameter("pId", c.getIdCategorie());
+		// Récupération du résultat
+		Categorie catOut=(Categorie) q.getSingleResult();
+		// Chargement de l'image
+		catOut.setImage("data:image/png;base64,"+Base64.encodeBase64String(catOut.getPhoto()));
 		// Envoi et récupération du résultat
-		return (Categorie) q.getSingleResult();
+		return catOut;
 	}
 
 }
