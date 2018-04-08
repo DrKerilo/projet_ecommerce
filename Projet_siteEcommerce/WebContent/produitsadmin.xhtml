@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Facelet</title>
+	<title>Espace administrateur</title>
 </h:head>
 <h:body>
 	<!-- Inclure le templace dans la page avec possibilité de modification -->
@@ -35,7 +35,7 @@
 
 				<!-- Affichage des produits correspondant à la catégorie choisie -->
 				<p:layoutUnit position="center">
-					<h:form id="form">
+					<h:form id="form" >
 						<p:growl id="msgs" showDetail="true" />
 
 						<p:dataTable id="prod1" var="prod"
@@ -122,7 +122,7 @@
 
 						<!-- Boîte de dialogue pour la fonction "Sélection" -->
 						<p:dialog header="Produit" widgetVar="prodDialog" global="true"
-							showEffect="fade" hideEffect="fade" resizable="false">
+							showEffect="fade" hideEffect="fade" resizable="false" appendTo="@(body)">
 							<p:outputPanel id="prodDetail" style="text-align:center;">
 								<p:panelGrid columns="2"
 									rendered="#{not empty produitMB.produit}"

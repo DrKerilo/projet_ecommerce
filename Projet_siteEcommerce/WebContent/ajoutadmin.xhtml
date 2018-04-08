@@ -17,7 +17,7 @@
 			<p:tabView style="height:100%">
 				<p:tab title="Ajouter une catégorie">
 					<h:form enctype="multipart/form-data">
-						<p:growl id="growl" summary="true" life="3000" />
+						<p:growl id="growlcat" summary="true" life="3000" />
 						<h:panelGrid columns="2">
 							<h:outputLabel for="nameCat" value="Nom de la catégorie:" />
 							<p:inputText id="nameCat"
@@ -27,15 +27,16 @@
 								value="#{categorieMB.categorie.description}" />
 							<h:outputLabel for="upPhoto" value="Photo:" />
 							<p:fileUpload id="upPhoto" value="#{categorieMB.uf}"
-								mode="simple" skinSimple="true" />
+								mode="simple" skinSimple="true" label="Choisir photo" />
 							<p:commandButton value="Ajouter Catégorie"
-								action="#{categorieMB.ajouter}" ajax="false" update="growl" />
+								action="#{categorieMB.ajouter}" ajax="false" update="growlcat" />
 						</h:panelGrid>
 					</h:form>
 					<h:messages style="color:red" />
 				</p:tab>
 				<p:tab title="Ajouter un produit">
-					<h:form>
+					<h:form enctype="multipart/form-data">
+						<p:growl id="growlprod" summary="true" life="3000" />
 						<h:panelGrid columns="2">
 							<h:outputLabel for="nameCat" value="Nom du produit:" />
 							<p:inputText value="#{produitMB.produit.designation}" />
@@ -50,7 +51,11 @@
 								<f:selectItems value="#{sessionScope.listeCategories}" var="cat"
 									itemLabel="#{cat.nomCategorie}" itemValue="#{cat.idCategorie}" />
 							</p:selectOneMenu>
-							<p:commandButton value="Ajouter" action="#{produitMB.ajouter}" />
+							<h:outputLabel for="upPhoto" value="Photo:" />
+							<p:fileUpload id="upPhoto" value="#{produitMB.uf}" mode="simple"
+								skinSimple="true" label="Choisir photo" />
+							<p:commandButton value="Ajouter" ajax="false" update="growlprod"
+								action="#{produitMB.ajouter}" />
 						</h:panelGrid>
 					</h:form>
 				</p:tab>

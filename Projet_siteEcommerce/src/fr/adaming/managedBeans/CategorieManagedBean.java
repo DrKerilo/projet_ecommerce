@@ -91,7 +91,6 @@ public class CategorieManagedBean implements Serializable {
 	public String ajouter() {
 		// Ajouter la photo dans la catégorie
 		categorie.setPhoto(uf.getContents());
-		System.out.println(uf);
 		
 		Categorie catAjout = categorieService.add(categorie);
 		if (catAjout.getIdCategorie() != 0) {
