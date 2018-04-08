@@ -83,8 +83,7 @@ public class CategorieManagedBean implements Serializable {
 
 	public String consulterTout() {
 		this.listeCategories = categorieService.getAll();
-		this.session.setAttribute("listeCategories", listeCategories);	
-		System.out.println("Je suis là");
+		this.session.setAttribute("listeCategories", listeCategories);
 		return "categories";
 	}
 

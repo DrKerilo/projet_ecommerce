@@ -128,7 +128,7 @@
 									rendered="#{not empty produitMB.produit}"
 									columnClasses="label,value">
 									<f:facet name="header">
-										<p:graphicImage library="images" name="bckgnd-admin.png" />
+										<p:graphicImage value="#{produitMB.produit.image}" />
 									</f:facet>
 
 									<h:outputText value="#:" />

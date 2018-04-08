@@ -79,7 +79,7 @@ public class CategorieDaoImpl implements ICategorieDao {
 		Categorie catOut=(Categorie) q.getSingleResult();
 		// Chargement de l'image
 		catOut.setImage("data:image/png;base64,"+Base64.encodeBase64String(catOut.getPhoto()));
-		// Envoi et récupération du résultat
+		// Envoi du résultat
 		return catOut;
 	}
 
