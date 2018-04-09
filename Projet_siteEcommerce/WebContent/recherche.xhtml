@@ -11,11 +11,27 @@
 </h:head>
 
 <h:body>
+		<h:form>
+			<p:growl id="messages" />
 
-<h1>Consulter produit par catégorie</h1>
+			<p:menubar style="padding:10px;background:#f6a828;border:1px solid #F77A10">
+			
+				<p:menuitem value="Accueil" url="accueil.xhtml" icon="ui-icon-home"/>
+				
+				<p:menuitem value="Voir nos catégories" url="categories.xhtml" icon="ui-icon-heart"/>
+				
+				<p:menuitem value="Chercher un produit" url="recherche.xhtml" icon="ui-icon-search"/>
+
+			</p:menubar>
+		</h:form>
+<h2>Consulter produit par catégorie</h2>
 <h:form>
 		<h:panelGrid columns="2">
-		Catégorie : <h:inputText value="#{produitMB.categorie.idCategorie}" />
+		Catégorie : <p:selectOneMenu id="Cat" value="#{panierMB.categorie.idCategorie}">
+						<f:selectItems value="#{panierMB.listeCategories}" var="cat"
+							itemLabel="#{cat.nomCategorie}"
+							itemValue="#{cat.idCategorie}" />
+					</p:selectOneMenu>
 			<h:commandButton value="Consulter produits par catégorie"
 				action="#{produitMB.consulterToutByCategorie}" />
 		</h:panelGrid>
@@ -45,18 +61,32 @@
 		        <h:outputText value="#{produit.categorie.idCategorie}" />
 		    </p:column>
 		</p:dataTable>	
-</h:form>
-<h:form>             
-    <h3 style="margin-top: 0">Selection produit</h3>
-    designation : <h:inputText value="#{panierMB.produit.designation}" />
-    prix : <h:inputText value="#{panierMB.produit.prix}" />   
-	    <h:panelGrid columns="2" cellpadding="5" styleClass="ui-grid">
-	        <h:outputLabel for="minMax" value="Quantité : " />
-	        <p:spinner id="minMax" value="#{panierMB.ligneCommande.quantite}" min="0" max="20" />
-	    </h:panelGrid>
- 
-    <p:commandButton value="Submit" action="#{panierMB.ajoutProduitPanier}" />
-</h:form>
+</h:form>        
+
+<hr/>    
+    <h2 style="margin-top: 0">Selection produit</h2>
+
+			<h:form>
+				<h:panelGrid columns="2">					
+					<h:outputLabel for="Cat" value="Selectionner une catégorie :" />
+					<p:selectOneMenu id="Cat" value="#{panierMB.categorie.idCategorie}">
+						<f:selectItems value="#{panierMB.listeCategories}" var="cat"
+							itemLabel="#{cat.nomCategorie}"
+							itemValue="#{cat.idCategorie}" />
+					<p:ajax event="keyup" update="Prod"
+					listener="#{paniertMB.getByCategorieEvent}" />
+					</p:selectOneMenu>
+					<h:outputLabel for="Prod" value="Selectionner un produit :" />
+					<p:selectOneMenu id="Prod" value="#{panierMB.produit.idProduit}">
+						<f:selectItems value="#{panierMB.listeProduits}" var="prod"
+							itemLabel="#{prod.designation}"
+							itemValue="#{prod.idProduit}" />
+					</p:selectOneMenu>
+					<h:outputLabel for="minMax" value="Quantité : " />
+       				<p:spinner id="minMax" value="#{panierMB.ligneCommande.quantite}" min="0" max="20" />
+					<p:commandButton value="Ajouter au panier" action="#{panierMB.ajoutProduitPanier()}" />
+				</h:panelGrid>
+			</h:form>
 
 <h:form>
 		<p:dataTable var="lc" value="#{sessionScope.listeLignesCommandes}" >

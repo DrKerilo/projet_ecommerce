@@ -12,12 +12,15 @@ import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.RowEditEvent;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
 import fr.adaming.model.LigneCommande;
 import fr.adaming.model.Produit;
+import fr.adaming.service.ICategorieService;
 import fr.adaming.service.ICommandeService;
 import fr.adaming.service.ILigneCommandeService;
+import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "panierMB")
 @RequestScoped
@@ -30,6 +33,12 @@ public class PanierManagedBean implements Serializable{
 	@EJB
 	ICommandeService commandeService;
 	
+	@EJB
+	IProduitService produitService;
+	
+	@EJB
+	ICategorieService categorieService;
+	
 	// attributs du managedBean
 	private LigneCommande ligneCommande;
 	private Produit produit;
@@ -37,11 +46,15 @@ public class PanierManagedBean implements Serializable{
 	HttpSession session;
 	private List<LigneCommande> listeLignesCommandes;
 	private Client client;
+	private List<Produit> listeProduits;
+	private Categorie categorie;
+	private List<Categorie> listeCategories;
 
 	// constructeur vide
 	public PanierManagedBean() {
 		ligneCommande = new LigneCommande();
-		produit = new Produit();		
+		produit = new Produit();
+		categorie = new Categorie();
 	}
 	
 	@PostConstruct
@@ -49,6 +62,7 @@ public class PanierManagedBean implements Serializable{
 		// pour que la méthode s'exécute après l'instanciation du ManagedBean
 		this.session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		commande = new Commande();
+		listeCategories = categorieService.getAll();
 	}
 
 	// guetters et seters
@@ -98,12 +112,42 @@ public class PanierManagedBean implements Serializable{
 
 	public void setClient(Client client) {
 		this.client = client;
-	}	
+	}
 	
+	public List<Produit> getListeProduits() {
+		return listeProduits;
+	}
 
+	public void setListeProduits(List<Produit> listeProduits) {
+		this.listeProduits = listeProduits;
+	}
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	public List<Categorie> getListeCategories() {
+		return listeCategories;
+	}
+
+	public void setListeCategories(List<Categorie> listeCategories) {
+		this.listeCategories = listeCategories;
+	}
+
+	
 	// méthodes du managedBean
 
+	public void getByCategorieEvent() {
+		listeProduits = produitService.getAll(categorie);
+		this.categorie = categorieService.get(categorie);
+	}
+	
 	public String ajoutProduitPanier(){
+		this.categorie = categorieService.get(categorie);
 		this.ligneCommande = ligneCommandeService.ajoutLigneCommande(this.ligneCommande, this.produit, this.commande);
 		listeLignesCommandes = ligneCommandeService.getAllLignesCommandes(commande);
 		session.setAttribute("LignesCommandesSession", listeLignesCommandes);
