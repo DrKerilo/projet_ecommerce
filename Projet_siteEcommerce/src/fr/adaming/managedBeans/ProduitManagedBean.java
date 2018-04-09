@@ -7,11 +7,13 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.UploadedFile;
+import org.primefaces.model.UploadedFileWrapper;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
@@ -19,7 +21,7 @@ import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "produitMB")
-@RequestScoped
+@SessionScoped
 public class ProduitManagedBean implements Serializable {
 
 	// transformer l'association uml en java
@@ -34,12 +36,14 @@ public class ProduitManagedBean implements Serializable {
 	private List<Produit> listeProduits;
 	private Categorie categorie;
 	HttpSession session;
+	private UploadedFile uf;
 
 	// constructeur vide
 	public ProduitManagedBean() {
 		// instancier un produit
 		this.produit = new Produit();
 		this.categorie = new Categorie();
+		this.uf=new UploadedFileWrapper();
 	}
 
 	@PostConstruct
@@ -51,25 +55,26 @@ public class ProduitManagedBean implements Serializable {
 	public Produit getProduit() {
 		return produit;
 	}
-
 	public void setProduit(Produit produit) {
 		this.produit = produit;
 	}
-
 	public List<Produit> getListeProduits() {
 		return listeProduits;
 	}
-
 	public void setListeProduits(List<Produit> listeProduits) {
 		this.listeProduits = listeProduits;
 	}
-
 	public Categorie getCategorie() {
 		return categorie;
 	}
-
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
+	}
+	public UploadedFile getUf() {
+		return uf;
+	}
+	public void setUf(UploadedFile uf) {
+		this.uf = uf;
 	}
 
 	// méthodes du managedBean
@@ -86,15 +91,17 @@ public class ProduitManagedBean implements Serializable {
 	}
 
 	public String ajouter() {
+		// Ajouter la photo du produit
+		produit.setPhoto(uf.getContents());
 		this.categorie = catService.get(categorie);
 		Produit pAjoute = produitService.add(this.produit, categorie);
 		if (pAjoute != null) {
 			this.listeProduits = produitService.getAll();
-			return "espaceAdmin.xhtml";
+			return "espaceAdmin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("Une erreur est survenue, produit non ajouté."));
-			return "#";
+			return "ajoutadmin";
 		}
 	}
 
